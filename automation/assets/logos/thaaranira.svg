@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Thaaranira">
+<title>Thaaranira</title>
+<rect width="64" height="64" rx="14" fill="#C29B2A"/>
+<polygon points="32.00,10.00 36.47,21.85 49.12,22.44 39.23,30.35 42.58,42.56 32.00,35.60 21.42,42.56 24.77,30.35 14.88,22.44 27.53,21.85" fill="#16271F" stroke-linejoin="round"/>
+<circle cx="20" cy="52" r="2.7" fill="#A3462B" opacity="1"/>
+<circle cx="26" cy="52" r="2.7" fill="#A3462B" opacity="1"/>
+<circle cx="32" cy="52" r="2.7" fill="#F3F5EF" opacity="1"/>
+<circle cx="38" cy="52" r="2.7" fill="#F3F5EF" opacity="0.45"/>
+<circle cx="44" cy="52" r="2.7" fill="#F3F5EF" opacity="0.45"/>
+<circle cx="32" cy="52" r="2.7" fill="#257A4B"/>
+</svg>

@@ -1,0 +1,62 @@
+{
+  "_about": "16 slots = 4 weeks of Monday, Wednesday (reel), Friday, Saturday. Each cycle every game gets one slot and five slots are general Play Keralam posts. Game slots take games from gameOrder rotated by 3 per cycle, so over cycles every game lands on a reel. Formats come from games.json, the cycle number picking which one (cycle mod number of formats). 'next' is the slot the next run starts at.",
+  "slots": [
+    "game",
+    "game",
+    "game",
+    "general",
+    "game",
+    "game",
+    "game",
+    "general",
+    "game",
+    "game",
+    "game",
+    "general",
+    "game",
+    "game",
+    "general",
+    "general"
+  ],
+  "gameOrder": [
+    "vaakku",
+    "thaaranira",
+    "cidmoosa",
+    "paryayam",
+    "kerala-guesser",
+    "thurupp",
+    "katha",
+    "aadyam",
+    "sat",
+    "antakshari",
+    "ashwamedham"
+  ],
+  "generalOrder": [
+    "daily-four",
+    "front-page",
+    "streaks",
+    "weekend-challenge",
+    "all-games"
+  ],
+  "cycle": 0,
+  "next": 0,
+  "history": [
+    {
+      "date": "2026-10-20",
+      "kind": "post",
+      "topic": "general:all-games",
+      "format": "launch-carousel",
+      "note": "Launch carousel, scheduled by hand",
+      "metricoolUuid": "2376706121060532444",
+      "instagram": "https://www.instagram.com/p/DeuKayQiFav/"
+    },
+    {
+      "date": "2026-10-21",
+      "kind": "reel",
+      "topic": "general:all-games",
+      "format": "launch-reel",
+      "note": "Launch reel, scheduled by hand",
+      "metricoolUuid": "-8552409670758741033"
+    }
+  ]
+}

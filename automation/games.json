@@ -1,0 +1,241 @@
+{
+  "_about": "One entry per Play Keralam game: names, colours, page, how it plays and the post formats it rotates through. Facts come from the site's README; keep them true to the games. Daily-game puzzles in posts are always YESTERDAY's (see PLAYBOOK.md).",
+  "games": {
+    "vaakku": {
+      "ml": "വാക്ക്",
+      "en": "Vaakku",
+      "path": "/wordle/",
+      "logo": "vaakku.svg",
+      "color": "#257A4B",
+      "kind": "daily",
+      "pitch_en": "A Malayalam Wordle. Guess the day's word in six tries.",
+      "pitch_ml": "മലയാളം വേർഡിൽ. ഇന്നത്തെ വാക്ക് ആറ് ശ്രമത്തിൽ കണ്ടുപിടിക്കൂ.",
+      "facts": [
+        "The word has 3 or 4 boxes; each box holds one akshara, so a conjunct like ക്ക or a chillu like ൻ fits in one box.",
+        "Green: right letter, right box. Yellow: in the word, another box. Grey: nothing from that letter's family.",
+        "Type on the on-screen aksharamaala, or in English letters: 'kappal' becomes കപ്പൽ.",
+        "A new word every day at midnight India time, the same for everyone.",
+        "Streak awards: Chiraath (ചിരാത്) at 3 days, Nilavilakku (നിലവിളക്ക്) at 10, Chundan vallam (ചുണ്ടൻ വള്ളം) at 50, Gajarajan (ഗജരാജൻ) at 100.",
+        "Guesses are checked against about 326,000 Malayalam words."
+      ],
+      "formats": [
+        "yesterday-word",
+        "how-to-play",
+        "streak-awards"
+      ],
+      "shot": "/wordle/"
+    },
+    "paryayam": {
+      "ml": "പര്യായം",
+      "en": "Paryayam",
+      "path": "/paryayam/",
+      "logo": "paryayam.svg",
+      "color": "#2D3E8B",
+      "kind": "daily",
+      "pitch_en": "One Malayalam word a day. Find its five best-known synonyms.",
+      "pitch_ml": "ദിവസവും ഒരു വാക്ക്. അതിന്റെ അഞ്ച് പര്യായങ്ങൾ കണ്ടെത്തൂ.",
+      "facts": [
+        "Type in English letters (Manglish): aadithyan, adityan and adhithyan all make ആദിത്യൻ.",
+        "Five tiles fill in as you find the five; any other synonym counts as a bonus word.",
+        "Hint shows one more letter of a word each tap; Give up shows all five.",
+        "A new word every day at midnight India time."
+      ],
+      "formats": [
+        "yesterday-synonyms",
+        "how-to-play"
+      ],
+      "shot": "/paryayam/"
+    },
+    "thaaranira": {
+      "ml": "താരനിര",
+      "en": "Thaaranira",
+      "path": "/cast/",
+      "logo": "thaaranira.svg",
+      "color": "#C29B2A",
+      "kind": "daily",
+      "pitch_en": "Name the Malayalam film from its cast, one name at a time.",
+      "pitch_ml": "താരനിര കണ്ട് മലയാള സിനിമയുടെ പേര് പറയൂ.",
+      "facts": [
+        "You see the first name in IMDb's top cast; every wrong guess shows the next one, up to ten.",
+        "Spelling needn't be exact: 'kiridam' finds Kireedam.",
+        "792 well-known films, a new one every day at midnight India time, no repeat for over two years."
+      ],
+      "formats": [
+        "cast-puzzle",
+        "how-to-play"
+      ],
+      "shot": "/cast/"
+    },
+    "katha": {
+      "ml": "കഥ",
+      "en": "Katha",
+      "path": "/plot/",
+      "logo": "katha.svg",
+      "color": "#16271F",
+      "kind": "daily",
+      "pitch_en": "Read a Malayalam film's story and name the film. Ten stories a day, easy to hard.",
+      "pitch_ml": "കഥ വായിച്ച് സിനിമ ഏതെന്ന് പറയൂ. ദിവസവും പത്ത് കഥകൾ.",
+      "facts": [
+        "The story is IMDb's description with the film's own name blacked out.",
+        "Three tries per story: the first miss shows the year and genre, the second the director and top star.",
+        "Rounds 1-3 are easy, 4-7 medium, 8-10 hard."
+      ],
+      "formats": [
+        "story-puzzle",
+        "how-to-play"
+      ],
+      "shot": "/plot/"
+    },
+    "aadyam": {
+      "ml": "ആദ്യം",
+      "en": "Aadyam",
+      "path": "/first/",
+      "logo": "aadyam.svg",
+      "color": "#A3462B",
+      "kind": "arcade",
+      "pitch_en": "Two Malayalam films: tap the one that came out first.",
+      "pitch_ml": "രണ്ട് സിനിമകൾ. ആദ്യം ഇറങ്ങിയത് ഏത്?",
+      "facts": [
+        "An endless run: it ends on the first wrong answer; your score is how many in a row.",
+        "It gets harder: the gap starts at 15+ years and shrinks to under a month.",
+        "1,905 films, each card with its director and first three stars."
+      ],
+      "formats": [
+        "which-first",
+        "how-to-play"
+      ],
+      "shot": "/first/"
+    },
+    "ashwamedham": {
+      "ml": "അശ്വമേധം",
+      "en": "Ashwamedham",
+      "path": "/ashwamedham/",
+      "logo": "ashwamedham.svg",
+      "color": "#1F5F74",
+      "kind": "arcade",
+      "pitch_en": "Think of any Malayalam film. It asks yes/no questions until it names it.",
+      "pitch_ml": "ഒരു മലയാള സിനിമ മനസ്സിൽ വിചാരിക്കൂ. ചോദ്യങ്ങൾ ചോദിച്ച് അത് കണ്ടുപിടിക്കും.",
+      "facts": [
+        "After the Malayalam TV quiz Ashwamedham.",
+        "It knows 6,656 Malayalam films, even ones with no ratings.",
+        "Answer yes, no or not sure; Undo takes back an answer.",
+        "It names the film once it is 80% sure, and gives up after three wrong names or 30 questions."
+      ],
+      "formats": [
+        "challenge",
+        "how-it-works"
+      ],
+      "shot": "/ashwamedham/"
+    },
+    "antakshari": {
+      "ml": "അന്താക്ഷരി",
+      "en": "Antakshari helper",
+      "path": "/antakshari/",
+      "logo": "antakshari.svg",
+      "color": "#5B2A4E",
+      "kind": "arcade",
+      "pitch_en": "Stuck on a letter in film Antakshari? Get films that start with it.",
+      "pitch_ml": "സിനിമ അന്താക്ഷരിയിൽ ഒരു അക്ഷരത്തിൽ കുടുങ്ങിയോ? സഹായം ഇവിടെ.",
+      "facts": [
+        "Pick a letter and see every film that starts with it, best known first.",
+        "Type the film the other side said; it jumps to its last letter.",
+        "Covers 6,176 released Malayalam films."
+      ],
+      "formats": [
+        "letter-challenge",
+        "how-to-use"
+      ],
+      "shot": "/antakshari/"
+    },
+    "kerala-guesser": {
+      "ml": "കേരള ഗെസ്സർ",
+      "en": "Kerala Guesser",
+      "path": "/guesser/",
+      "logo": "kerala-guesser.svg",
+      "color": "#2E7F93",
+      "kind": "arcade",
+      "pitch_en": "GeoGuessr for Kerala: find places on a blank map.",
+      "pitch_ml": "കേരളത്തിന്റെ മാപ്പിൽ സ്ഥലങ്ങൾ കണ്ടുപിടിക്കൂ.",
+      "facts": [
+        "Three levels: the 14 districts, the 140 assembly constituencies, or all 1,034 local bodies.",
+        "Ten places a game, out of 1,000 points; anywhere inside the place scores 100.",
+        "After each guess the map shows how far off you were."
+      ],
+      "formats": [
+        "where-is-it",
+        "levels"
+      ],
+      "shot": "/guesser/"
+    },
+    "thurupp": {
+      "ml": "തുരുപ്പ്",
+      "en": "Thurupp",
+      "path": "/thurupp/",
+      "logo": "thurupp.svg",
+      "color": "#1D5A3C",
+      "kind": "arcade",
+      "pitch_en": "Kerala's card game 28, online with friends or against bots.",
+      "pitch_ml": "കേരളത്തിന്റെ 28 ചീട്ടുകളി, കൂട്ടുകാരോടൊപ്പം ഓൺലൈനായി.",
+      "facts": [
+        "Four players in two teams, partners sitting opposite; 28 points in the deck; one hidden trump.",
+        "Make a room and share its code; empty seats are filled by bots.",
+        "Or play offline against three bots."
+      ],
+      "formats": [
+        "how-to-play-28",
+        "play-with-friends"
+      ],
+      "shot": "/thurupp/public/"
+    },
+    "cidmoosa": {
+      "ml": "സി.ഐ.ഡി. മൂസ",
+      "en": "CID Moosa",
+      "path": "/cidmoosa/",
+      "logo": "cidmoosa.svg",
+      "color": "#B8332A",
+      "kind": "arcade",
+      "pitch_en": "A 3D car chase from Thiruvananthapuram to Kasaragod in Moosa's gadget car.",
+      "pitch_ml": "തിരുവനന്തപുരം മുതൽ കാസർഗോഡ് വരെ ഒരു 3D കാർ ചേസ്.",
+      "facts": [
+        "Police jeeps and Bullet bikes chase Moosa's red convertible.",
+        "Gadgets: Goli (marbles), oil slick, smoke screen and chilli powder.",
+        "Thorappan can throw eggs and steel plates from the back seat.",
+        "Each district you reach opens as a new start; Easy, Medium or Hard.",
+        "On a phone, the screen is the controller."
+      ],
+      "formats": [
+        "gadgets",
+        "route"
+      ],
+      "shot": null
+    },
+    "sat": {
+      "ml": "സാറ്റ്",
+      "en": "SAT!",
+      "path": "/sat/",
+      "logo": "sat.svg",
+      "color": "#B8602A",
+      "kind": "arcade",
+      "pitch_en": "Kerala hide-and-seek in 3D. Race to the wall and shout SAT!",
+      "pitch_ml": "നമ്മുടെ സാറ്റ് കളി, ഇനി 3Dയിൽ.",
+      "facts": [
+        "One player counts at the wall while everyone hides; when you're spotted, race to the wall and shout SAT!",
+        "Set in a two-storey tharavad with a nadumuttam, coconut palms, a mango-tree swing, a well and a haystack.",
+        "Up to 10 players, bots fill empty slots, and online rooms to play with friends."
+      ],
+      "formats": [
+        "the-tharavad",
+        "how-to-play"
+      ],
+      "shot": null
+    }
+  },
+  "general": {
+    "all-games": "All 11 games at a glance, daily and any-time.",
+    "daily-four": "The four daily games (Vaakku, Paryayam, Thaaranira, Katha): new at midnight, keep your streak, one lamp per game lit when done.",
+    "front-page": "The front page is a Pooram at night: lights, fireworks, two elephants, and today's date in both the English and the Malayalam calendar (Kollavarsham).",
+    "streaks": "Streaks and awards: Chiraath, Nilavilakku, Chundan vallam, Gajarajan; confetti once all four dailies are done.",
+    "weekend-challenge": "A weekend challenge: finish all four daily games today and comment your scores."
+  },
+  "_shots": "'shot' is the local path shoot.py opens for a phone screenshot (null: a 3D game that needs a build; use designed slides instead). The front page is '/'."
+}
