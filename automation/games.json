@@ -232,9 +232,9 @@
   },
   "general": {
     "all-games": "All 11 games at a glance, daily and any-time.",
-    "daily-four": "The four daily games (Vaakku, Paryayam, Thaaranira, Katha): new at midnight, keep your streak, one lamp per game lit when done.",
+    "daily-four": "The four daily games (Vaakku, Paryayam, Thaaranira, Katha): new at midnight India time, the same for everyone; each keeps its own streak; the front page lights one lamp per game once it is done, with confetti when all four are. (The named streak awards belong to Vaakku only.)",
     "front-page": "The front page is a Pooram at night: lights, fireworks, two elephants, and today's date in both the English and the Malayalam calendar (Kollavarsham).",
-    "streaks": "Streaks and awards: Chiraath, Nilavilakku, Chundan vallam, Gajarajan; confetti once all four dailies are done.",
+    "streaks": "Streaks: every daily game keeps a streak. Vaakku's streak awards are Chiraath (3 days), Nilavilakku (10), Chundan vallam (50) and Gajarajan (100); say they are Vaakku's. The front page lights a lamp per daily game done today, confetti when all four are.",
     "weekend-challenge": "A weekend challenge: finish all four daily games today and comment your scores."
   },
   "_shots": "'shot' is the local path shoot.py opens for a phone screenshot (null: a 3D game that needs a build; use designed slides instead). The front page is '/'."
