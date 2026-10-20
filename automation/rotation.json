@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 0,
+  "next": 4,
   "history": [
     {
       "date": "2026-10-20",
@@ -57,6 +57,54 @@
       "format": "launch-reel",
       "note": "Launch reel, scheduled by hand",
       "metricoolUuid": "-8552409670758741033"
+    },
+    {
+      "date": "2026-10-26",
+      "kind": "post",
+      "topic": "vaakku",
+      "format": "yesterday-word",
+      "rotationIndex": 0,
+      "cycle": 0,
+      "metricoolUuid": "-2647500733970823538",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-2647500733970823538",
+      "folder": "2026-10-26-vaakku-post",
+      "title": "Vaakku #33 yesterday's word (തൊഴിലാളി), 5-slide carousel"
+    },
+    {
+      "date": "2026-10-28",
+      "kind": "reel",
+      "topic": "thaaranira",
+      "format": "cast-puzzle",
+      "rotationIndex": 1,
+      "cycle": 0,
+      "metricoolUuid": "-3240799390555222772",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-3240799390555222772",
+      "folder": "2026-10-28-thaaranira-reel",
+      "title": "Thaaranira #34 cast puzzle (Kumbalangi Nights), voiced reel 33s, arjun"
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "post",
+      "topic": "cidmoosa",
+      "format": "gadgets",
+      "rotationIndex": 2,
+      "cycle": 0,
+      "metricoolUuid": "-3003665230885204132",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-3003665230885204132",
+      "folder": "2026-10-30-cidmoosa-post",
+      "title": "CID Moosa gadgets, 4-slide carousel"
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "post",
+      "topic": "general:daily-four",
+      "format": "daily-four",
+      "rotationIndex": 3,
+      "cycle": 0,
+      "metricoolUuid": "4848686038968123787",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=4848686038968123787",
+      "folder": "2026-10-31-daily-four-post",
+      "title": "The four daily games, 5-slide carousel"
     }
   ]
 }
