@@ -237,7 +237,9 @@ def render(spec_path, out_dir):
         else:
             samples = np.zeros(0, dtype=np.float32)
         lines.append(samples)
-        durs.append(max(float(s.get("min", 2.6)), len(samples) / SR + 0.75))
+        # 0.35 s of lead-in before the voice starts (see the mix below) plus ~0.5 s after it ends, so a scene
+        # never cuts off the moment the last word finishes.
+        durs.append(max(float(s.get("min", 2.4)), len(samples) / SR + 0.85))
     total = sum(durs)
     lo, hi = CONFIG["reels"]["minSeconds"], CONFIG["reels"]["maxSeconds"]
     if not lo <= total <= hi:

@@ -4,7 +4,11 @@
     "name_ml": "പ്ലേ കേരളം",
     "url": "playkeralam.com",
     "handle": "@playkeralam",
-    "never_say": ["Keralam Times", "keralamtimes", "pages.dev"]
+    "never_say": [
+      "Keralam Times",
+      "keralamtimes",
+      "pages.dev"
+    ]
   },
   "metricool": {
     "blogId": "7540170",
@@ -14,32 +18,85 @@
     "autoPublish": true
   },
   "week": {
-    "run": "Sunday 09:45 India time",
+    "run": "Mon, Wed, Fri, Sat at about 08:10 India time; one reel, scheduled for 21:00 the same day",
     "slots": [
-      { "weekday": "Monday", "offsetDays": 1, "time": "21:00", "kind": "post" },
-      { "weekday": "Wednesday", "offsetDays": 3, "time": "21:00", "kind": "reel" },
-      { "weekday": "Friday", "offsetDays": 5, "time": "21:00", "kind": "post" },
-      { "weekday": "Saturday", "offsetDays": 6, "time": "21:00", "kind": "post" }
+      {
+        "weekday": "Monday",
+        "offsetDays": 1,
+        "time": "21:00",
+        "kind": "reel"
+      },
+      {
+        "weekday": "Wednesday",
+        "offsetDays": 3,
+        "time": "21:00",
+        "kind": "reel"
+      },
+      {
+        "weekday": "Friday",
+        "offsetDays": 5,
+        "time": "21:00",
+        "kind": "reel"
+      },
+      {
+        "weekday": "Saturday",
+        "offsetDays": 6,
+        "time": "21:00",
+        "kind": "reel"
+      }
     ]
   },
   "repos": {
-    "media": { "owner": "abrahamAbY09", "repo": "playkeralam-media", "branch": "main",
-               "rawBase": "https://raw.githubusercontent.com/abrahamAbY09/playkeralam-media/main/" },
-    "site": { "owner": "abrahamAbY09", "repo": "Keralamtimes",
-              "branchHint": "claude/gracious-mccarthy-ri3iu2",
-              "branchRule": "Use the branch whose newest commit is latest among branches that contain both index.html and cast/films.js at the root." }
+    "media": {
+      "owner": "abrahamAbY09",
+      "repo": "playkeralam-media",
+      "branch": "main",
+      "rawBase": "https://raw.githubusercontent.com/abrahamAbY09/playkeralam-media/main/"
+    },
+    "site": {
+      "owner": "abrahamAbY09",
+      "repo": "Keralamtimes",
+      "branchHint": "claude/gracious-mccarthy-ri3iu2",
+      "branchRule": "Use the branch whose newest commit is latest among branches that contain both index.html and cast/films.js at the root."
+    }
   },
   "voice": {
-    "voices": ["vits-piper-ml_IN-arjun-medium", "vits-piper-ml_IN-meera-medium"],
+    "voices": [
+      "vits-piper-ml_IN-arjun-medium",
+      "vits-piper-ml_IN-meera-medium"
+    ],
     "rule": "Alternate by week: even ISO week number uses arjun, odd uses meera.",
     "download": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/{voice}.tar.bz2"
   },
   "captions": {
     "maxHashtags": 5,
     "alwaysTag": "#PlayKeralam",
-    "tagPool": ["#MalayalamGames", "#Malayalam", "#Mollywood", "#MalayalamMovies", "#MalayalamQuiz", "#MalayalamWords", "#Kerala", "#KeralaQuiz", "#MalayalamWordle", "#MalluGames"],
+    "tagPool": [
+      "#MalayalamGames",
+      "#Malayalam",
+      "#Mollywood",
+      "#MalayalamMovies",
+      "#MalayalamQuiz",
+      "#MalayalamWords",
+      "#Kerala",
+      "#KeralaQuiz",
+      "#MalayalamWordle",
+      "#MalluGames"
+    ],
     "linkLine": "ലിങ്ക് ബയോയിൽ · Link in bio · playkeralam.com"
   },
-  "reels": { "minSeconds": 22, "maxSeconds": 38, "width": 1080, "height": 1920, "fps": 30 },
-  "posts": { "width": 1080, "height": 1350, "minSlides": 3, "maxSlides": 6, "jpegQuality": 92 }
+  "reels": {
+    "minSeconds": 22,
+    "maxSeconds": 38,
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "posts": {
+    "width": 1080,
+    "height": 1350,
+    "minSlides": 3,
+    "maxSlides": 6,
+    "jpegQuality": 92
+  }
 }

@@ -9,6 +9,7 @@ numbers spelled out in words. Latin letters and digits come out garbled.
 import datetime as dt
 import functools
 import pathlib
+import subprocess
 import sys
 
 import numpy as np
@@ -41,6 +42,26 @@ def _tts(voice):
     return sherpa_onnx.OfflineTts(cfg)
 
 
+# The model's own "speed" setting barely changes the pace (Arjun stays near 1.6 words/second, which sounds
+# slow for a reel). So the finished audio is sped up with ffmpeg's pitch-preserving tempo filter instead.
+# 1.3 is about the limit before the voice starts to sound rushed or robotic.
+TEMPO = {"arjun": 1.3, "meera": 1.2}
+
+
+def _speed_up(samples, sr, tempo):
+    """Time-stretch float32 mono audio by `tempo` without changing pitch; also trims leading/trailing silence."""
+    if tempo == 1.0 or len(samples) == 0:
+        return samples
+    cmd = ["ffmpeg", "-v", "error", "-f", "f32le", "-ar", str(sr), "-ac", "1", "-i", "pipe:0",
+           "-af", f"silenceremove=start_periods=1:start_threshold=-45dB,atempo={tempo}",
+           "-f", "f32le", "-ar", str(sr), "-ac", "1", "pipe:1"]
+    r = subprocess.run(cmd, input=samples.astype(np.float32).tobytes(), capture_output=True)
+    if r.returncode != 0 or not r.stdout:
+        return samples  # fall back to the unstretched voice rather than fail the reel
+    return np.frombuffer(r.stdout, dtype=np.float32).copy()
+
+
 def speak(text, voice="meera"):
     audio = _tts(voice).generate(text, sid=0, speed=SPEED.get(voice, 1.0))
-    return np.clip(np.array(audio.samples, dtype=np.float32), -1, 1), audio.sample_rate
+    samples = np.clip(np.array(audio.samples, dtype=np.float32), -1, 1)
+    return np.clip(_speed_up(samples, audio.sample_rate, TEMPO.get(voice, 1.0)), -1, 1), audio.sample_rate

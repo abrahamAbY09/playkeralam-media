@@ -1,6 +1,7 @@
 """Work out the coming week's four posts from rotation.json, and record them once scheduled.
 
-    python3 plan_week.py plan --run-date YYYY-MM-DD      # prints the plan as JSON (run-date: the Sunday it runs)
+    python3 plan_week.py plan --run-date YYYY-MM-DD      # (old weekly mode) the coming week's four items
+    python3 plan_week.py plan-day --run-date YYYY-MM-DD  # (current daily mode) today's one reel; exit 3 = skip
     python3 plan_week.py record --plan plan.json --results results.json
         results.json: [{"slot": 0, "date": "...", "metricoolUuid": "...", "folder": "...", "title": "..."}, ...]
         Moves 'next' on by the slots recorded (wrapping into the next cycle) and appends to history.
@@ -69,6 +70,35 @@ def plan(run_date):
     print(json.dumps(out, ensure_ascii=False, indent=1))
 
 
+def plan_day(run_date):
+    """Plan the single reel that the morning run makes for `run_date` (today) and posts at 9 pm the same day."""
+    rot = load()
+    y, m, d = map(int, run_date.split("-"))
+    day = dt.date(y, m, d)
+    slots = {s["weekday"]: s for s in CONFIG["week"]["slots"]}
+    wd = day.strftime("%A")
+    if wd not in slots:
+        print(json.dumps({"skip": f"{run_date} is a {wd}; reels go out on {', '.join(slots)} only"}))
+        sys.exit(3)
+    if any(h.get("date") == day.isoformat() for h in rot["history"]):
+        print(json.dumps({"skip": f"{run_date} already has an entry in rotation.json (scheduled earlier, or by hand)"}))
+        sys.exit(3)
+    index = rot["next"] % 16
+    cycle = rot["cycle"] + rot["next"] // 16
+    t = slot_topic(rot, cycle, index)
+    item = {"slot": 0, "rotationIndex": index, "cycle": cycle, "date": day.isoformat(), "weekday": wd,
+            "time": slots[wd]["time"], "kind": "reel", **t,
+            "folder": f"{day.isoformat()}-{t['topic'].replace('general:', '')}-reel"}
+    month_counts = {}
+    for h in rot["history"]:
+        month_counts[h["date"][:7]] = month_counts.get(h["date"][:7], 0) + 1
+    month_counts[item["date"][:7]] = month_counts.get(item["date"][:7], 0) + 1
+    over = {k: v for k, v in month_counts.items() if v > CONFIG["metricool"]["monthlyPostLimit"]}
+    print(json.dumps({"runDate": run_date, "items": [item], "monthCounts": month_counts, "overLimit": over,
+                      "note": "One reel, posted at 9 pm today. If overLimit is not empty, stop and report it; do not schedule."},
+                     ensure_ascii=False, indent=1))
+
+
 def record(plan_path, results_path):
     rot = load()
     p = json.loads(pathlib.Path(plan_path).read_text(encoding="utf-8"))
@@ -96,11 +126,15 @@ if __name__ == "__main__":
     sub = ap.add_subparsers(dest="cmd", required=True)
     a = sub.add_parser("plan")
     a.add_argument("--run-date", required=True)
+    c = sub.add_parser("plan-day")
+    c.add_argument("--run-date", required=True)
     b = sub.add_parser("record")
     b.add_argument("--plan", required=True)
     b.add_argument("--results", required=True)
     args = ap.parse_args()
     if args.cmd == "plan":
         plan(args.run_date)
+    elif args.cmd == "plan-day":
+        plan_day(args.run_date)
     else:
         record(args.plan, args.results)
