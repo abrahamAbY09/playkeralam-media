@@ -38,6 +38,10 @@ goes out. There are **only reels** now: no carousels or image posts.
    If that branch is gone, list branches with `git ls-remote --heads origin`, fetch each with depth 1 and
    use the one that has both `index.html` and `cast/films.js` and the newest commit.
 3. `bash automation/scripts/setup.sh` (fonts, the voice runtime, the two Malayalam voices).
+   Run every script with plain `python3`, the same one setup.sh printed ("using Python ... at ..."). setup.sh
+   installs with `python3 -m pip`, so packages always go to that interpreter. Do not call `pip` or another
+   `python3.x` directly. If the Playwright package and the pre-installed Chromium are different versions, the
+   scripts fall back to the Chromium already on the machine (see `launch_chromium` in `common.py`); nothing to do.
 4. Work in `automation/work/<today>/` (git-ignored). Write scratch files there.
 
 ## 2. Plan today's reel
@@ -134,6 +138,10 @@ A general item has `"game": null` in the spec.
 ```
 
 Puzzle reels must not give the answer in the caption. Keep it under about 900 characters.
+
+Never write `#` before a number in a caption (no `#22`). `check.py` counts it as a hashtag and fails the caption
+at 6 tags, and Instagram would treat it as one too. Write the puzzle number as `നമ്പർ 22` (or `No. 22`). The `#N`
+in the recipes below is for the on-screen text inside the reel only.
 
 ## 4. Publish the media
 

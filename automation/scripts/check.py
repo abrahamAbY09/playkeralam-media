@@ -27,7 +27,9 @@ else:
     caption = caption_file.read_text(encoding="utf-8").strip()
 tags = re.findall(r"(?<!\w)#[\wഀ-ൿ]+", caption)
 if len(tags) > CONFIG["captions"]["maxHashtags"]:
-    errors.append(f"{len(tags)} hashtags; Instagram allows {CONFIG['captions']['maxHashtags']}")
+    numeric = [t for t in tags if re.fullmatch(r"#\d+", t)]
+    hint = f" ({', '.join(numeric)} counts as a hashtag; write 'നമ്പർ N' instead of '#N' in the caption)" if numeric else ""
+    errors.append(f"{len(tags)} hashtags; Instagram allows {CONFIG['captions']['maxHashtags']}{hint}")
 if CONFIG["captions"]["alwaysTag"] not in tags:
     errors.append(f"caption lacks {CONFIG['captions']['alwaysTag']}")
 if len(caption) > 2200:

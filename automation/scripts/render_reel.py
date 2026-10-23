@@ -30,7 +30,7 @@ from playwright.sync_api import sync_playwright
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from common import (BLUE, CONFIG, CREAM, DARK, GAMES, GREEN, INK, PINK, RED, YELLOW, YELLOW2,  # noqa: E402
-                    badge_uri, esc, fonts_head, game, is_dark, logo_uri, luminance, shade)
+                    badge_uri, esc, fonts_head, game, is_dark, launch_chromium, logo_uri, luminance, shade)
 import music  # noqa: E402
 from voice import speak, voice_for_week  # noqa: E402
 
@@ -263,7 +263,7 @@ def render(spec_path, out_dir):
     start = 0.0
     sheet_frames = []
     with sync_playwright() as p:
-        browser = p.chromium.launch(args=["--no-sandbox"])
+        browser = launch_chromium(p)
         page = browser.new_page(viewport={"width": W, "height": H})
         for i, (s, dur) in enumerate(zip(spec["scenes"], durs)):
             path = html_dir / f"scene-{i + 1}.html"

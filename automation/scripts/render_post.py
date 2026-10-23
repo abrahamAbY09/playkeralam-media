@@ -31,7 +31,7 @@ from playwright.sync_api import sync_playwright
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from common import (BLUE, CONFIG, CREAM, DARK, GAMES, GREEN, INK, PINK, RED, YELLOW, YELLOW2,  # noqa: E402
-                    badge_uri, esc, fonts_head, game, is_dark, logo_uri, luminance, shade)
+                    badge_uri, esc, fonts_head, game, is_dark, launch_chromium, logo_uri, luminance, shade)
 
 W, H = CONFIG["posts"]["width"], CONFIG["posts"]["height"]
 SPEC_DIR = pathlib.Path.cwd()
@@ -270,7 +270,7 @@ def render(spec_path, out_dir):
         print(f"WARNING: {total} slides; aim for {lo}-{hi}")
     files, warnings = [], []
     with sync_playwright() as p:
-        browser = p.chromium.launch(args=["--no-sandbox"])
+        browser = launch_chromium(p)
         page = browser.new_page(viewport={"width": W, "height": H})
         for i in range(total):
             html_path = work / f"slide-{i + 1}.html"

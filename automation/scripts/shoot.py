@@ -10,10 +10,15 @@ import argparse
 import datetime as dt
 import functools
 import http.server
+import pathlib
 import socketserver
+import sys
 import threading
 
 from playwright.sync_api import sync_playwright
+
+sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+from common import launch_chromium  # noqa: E402
 
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -41,7 +46,7 @@ def main():
     when = dt.datetime(y, m, d, 20, 0, tzinfo=ist) - dt.timedelta(days=1)
 
     with sync_playwright() as p:
-        browser = p.chromium.launch(args=["--no-sandbox"])
+        browser = launch_chromium(p)
         ctx = browser.new_context(viewport={"width": 390, "height": 844}, device_scale_factor=2,
                                   locale="en-IN", timezone_id="Asia/Kolkata", is_mobile=True, has_touch=True)
         ctx.add_init_script(f"try {{ localStorage.setItem('keralamtimes.lang', '{a.lang}'); }} catch (e) {{}}")

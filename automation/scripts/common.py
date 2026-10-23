@@ -23,6 +23,38 @@ PINK = "#FF8FB1"
 DARK = "#16271f"
 
 
+def _find_chromium():
+    """Path of a Chromium already on this machine (any Playwright revision), or None.
+    PK_CHROMIUM wins; otherwise look in PLAYWRIGHT_BROWSERS_PATH and the usual cache folders."""
+    import glob
+    env = os.environ.get("PK_CHROMIUM")
+    if env and os.path.exists(env):
+        return env
+    roots = [os.environ.get("PLAYWRIGHT_BROWSERS_PATH"), "/opt/pw-browsers",
+             os.path.expanduser("~/.cache/ms-playwright")]
+    for root in [r for r in roots if r and r != "0" and os.path.isdir(r)]:
+        for pattern in ("chromium-*/chrome-linux*/chrome", "chromium_headless_shell-*/chrome-*/headless_shell"):
+            hits = sorted(glob.glob(os.path.join(root, pattern)))
+            if hits:
+                return hits[-1]
+    return None
+
+
+def launch_chromium(p):
+    """Launch headless Chromium. The Playwright pip package and the pre-installed Chromium can come from
+    different revisions (the default launch then fails with "Executable doesn't exist"), so fall back to the
+    Chromium that is already on the machine instead of trying to download one."""
+    args = ["--no-sandbox"]
+    try:
+        return p.chromium.launch(args=args)
+    except Exception as first:
+        exe = _find_chromium()
+        if not exe:
+            raise
+        print(f"note: default Playwright Chromium unavailable ({str(first).splitlines()[0]}); using {exe}")
+        return p.chromium.launch(executable_path=exe, args=args)
+
+
 def esc(text):
     """Escape text for HTML and keep line breaks."""
     return html.escape(str(text or "")).replace("\n", "<br>")
