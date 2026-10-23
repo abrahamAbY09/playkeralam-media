@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 4,
+  "next": 5,
   "history": [
     {
       "date": "2026-10-20",
@@ -105,6 +105,18 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=4848686038968123787",
       "folder": "2026-10-31-daily-four-post",
       "title": "The four daily games, 5-slide carousel"
+    },
+    {
+      "date": "2026-10-23",
+      "kind": "reel",
+      "topic": "paryayam",
+      "format": "yesterday-synonyms",
+      "rotationIndex": 4,
+      "cycle": 0,
+      "metricoolUuid": "1854576815693186460",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=1854576815693186460",
+      "folder": "2026-10-23-paryayam-reel",
+      "title": "Paryayam #22 yesterday's synonyms (നക്ഷത്രം)"
     }
   ]
 }
