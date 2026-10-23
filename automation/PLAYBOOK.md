@@ -22,11 +22,39 @@ goes out. There are **only reels** now: no carousels or image posts.
 - **5 hashtags at most** (an Instagram limit), always including #PlayKeralam.
 - **One reel per run, at 9:00 pm today.** The Metricool free plan allows 20 posts a month; `plan_week.py`
   checks that.
-- **Reel pace: lively, like a normal Instagram reel.** The voice is not slow and not rushed: short, punchy
-  lines, a new scene every 3-5 seconds, and a short breath (about half a second) after each line so a scene
-  never cuts off the instant the last word ends. The voice is sped up for you in `voice.py`; don't fight it
-  by writing long sentences.
+- **Every reel follows the approved style** in *Reel style* below (Abr signed it off on 23 Oct 2026):
+  hook first, fast, items synced to the voice, proper conjuncts. The model is
+  `automation/examples/thaaranira-cast-puzzle.json`; copy its shape.
 - **Fully automatic**: `autoPublish: true`, `draft: false`. Don't wait for anyone.
+
+## Reel style (approved by Abr, 23 Oct 2026)
+
+These are his three requirements, plus what made the approved sample work. Don't loosen them.
+
+1. **Open with something catchy, then follow up.** The first scene is always a `hook`: a challenge or
+   question about the puzzle, in 1-3 huge, short lines, already on screen at frame 0 and over within about
+   2.5 seconds. Then the follow-up (the clues, the puzzle), then the reveal. Good hooks:
+   "4 സൂചന · 1 സിനിമ · എത്ര സൂചനയിൽ പറയും?", "3 അക്ഷരം · അർത്ഥം: sand · ഇന്നലത്തെ വാക്ക് പറയാമോ?",
+   "ഏത് പടമാണ് ആദ്യം? · A ഓ B ഓ?". Write a fresh hook for each reel in that spirit. Never open with a logo
+   alone, a greeting ("ഹലോ ഫ്രണ്ട്സ്"), the site name, or a slow intro. Hooks must be true: no invented
+   statistics or claims ("90% പേർക്കും തെറ്റും" is not allowed).
+2. **Pace: fast, about twice the first reels.** The voice speed is fixed in `voice.py` (Abr tried "twice as
+   fast", found it slightly too fast, and approved this setting; don't change it). Your part: one idea per
+   beat, 2-8 words per voice line, no filler. The renderer places lines back to back with a 0.14 s gap and
+   cuts each scene 0.38 s after its last line. A reel is **12-22 seconds** (the model is 14.4 s), 5-7 scenes,
+   about 30-45 spoken words.
+3. **Proper Malayalam conjuncts (കൂട്ടക്ഷരങ്ങൾ).** On-screen text must show ക്ക ട്ട ന്ന ത്ത ങ്ങ ണ്ട ഡ്ഡ ക്ഷ
+   and the rest as joined letters, never as two letters with a visible chandrakkala (ക്‌ക). The cause was
+   `<html lang="ml">`: with it, Baloo Chettan 2 switches to reformed-script forms and splits every conjunct.
+   The renderers no longer set it; never add it back. Don't type zero-width non-joiners (U+200C); the
+   renderer strips them. Check the frames for split conjuncts every time.
+4. **Sync.** Every on-screen item lands the moment its voice line starts (that's what a beat is): cast
+   names, steps, tiles, the answer. Nothing sits on screen waiting for the voice, and the voice never talks
+   about something not yet shown.
+5. **Shape:** hook → the puzzle or content (one item per beat) → a short countdown ("കിട്ടിയോ?" 3·2·1) when
+   there's an answer to reveal → the reveal with a comment question ("എത്രാമത്തെ സൂചനയിൽ കിട്ടി? കമന്റ്
+   ചെയ്യൂ!") → the CTA. Sounds (boom, pops, ticks, the reveal ding, whooshes between scenes) and the 124 bpm
+   music bed are added by the renderer.
 
 ## 1. Set up (about 5 minutes)
 
@@ -69,58 +97,67 @@ In its own folder `automation/work/<today>/<folder>/`:
 2. **Screenshot** (when the recipe uses one and the game has a `shot` path in games.json):
    `python3 automation/scripts/shoot.py --site <site> --date <item.date> --page <shot path> --out shot.png`
    (the front page is `--page /`). It shows the day before the reel, in Malayalam, with the help box closed.
-3. **Spec**: write `spec.json` following the *Reel scenes* column of the recipe table (below) and the scene
-   types documented at the top of `render_reel.py`.
-4. **Render**: `python3 automation/scripts/render_reel.py spec.json out` (about 2-3 minutes).
-5. **Look at it.** Read `out/contact-sheet.jpg` as an image. Check: the Malayalam reads correctly with no broken
-   letters, nothing overlaps or is cut off, the facts match facts.json, no spoiler, the brand is right.
-   A renderer `WARNING` that text "still overflows" or content is "taller than the slide" must be fixed
-   (shorter text, fewer items); "shrank a lot" is fine if it still reads well on a phone. The renderer prints
-   the reel's length: it must be 22-38 seconds, so lengthen or shorten the `say` lines if it is outside.
-   Re-render until it is clean. (Rendering takes a few minutes; this is why the run starts in the morning.)
+3. **Spec**: write `spec.json` in beats, following the recipe for today's format (below), the scene types at
+   the top of `render_reel.py`, and the shape of `automation/examples/thaaranira-cast-puzzle.json` (read it
+   first, every run). Copy screenshots into this folder and refer to them by file name (`"shot": "shot.png"`).
+4. **Render**: `python3 automation/scripts/render_reel.py spec.json out` (about a minute).
+5. **Look at it.** Read `out/contact-sheet.jpg` (a frame after every beat) and `out/cover.jpg` (the end of the
+   hook) as images. Check:
+   - the hook is the first thing on screen and reads as a question or challenge;
+   - **every conjunct is joined**: zoom in (crop a frame at full size) if the text is small; any ക്‌ക-style
+     split means something re-added `lang="ml"` or a U+200C; fix it, don't post it;
+   - nothing overlaps or is cut off, every item appears with its line, the facts match facts.json, no
+     spoiler, the brand is right.
+   Every renderer `WARNING` must be fixed (it flags Latin letters or digits in a voice line, long voice
+   lines, content outside the safe area, a first scene that isn't a hook, and a length outside 12-22 s).
+   Re-render until it is clean.
 6. **Caption**: write `out/caption.txt` (see *Captions*).
 7. **Check**: `python3 automation/scripts/check.py out` must pass.
 
-### Recipes (reels: 5-7 scenes, 25-35 seconds)
+### Recipes (reels: 5-7 scenes, 12-22 seconds, hook first)
 
-Puzzle formats show the puzzle, then the answer in the next scene, then how the game plays and the call to
-play. Use the facts exactly. `#N` is the puzzle number from facts (yesterday's). The *Post slides* column is
-kept for reference only; **we only make reels now**, so use the *Reel scenes* column.
+`#N` is the puzzle number from facts (yesterday's) and is fine on screen; in a `say` line write the number as a
+Malayalam word or leave it out. The hooks are starting points: write a fresh one each time, true and short.
+"Countdown" means the `countdown` scene exactly as in the model reel. The CTA is always the last scene
+(`shot` of the game's page when the recipe has one, else no shot), with "side" a two-line true fact from
+games.json, and its last beat says "പ്ലേ കേരളം ഡോട്ട് കോമിൽ സൗജന്യമായി കളിക്കൂ!".
 
-| Format | Post slides | Reel scenes |
+| Format | Hook (scene 1) | Then (one item per beat) |
 | --- | --- | --- |
-| vaakku `yesterday-word` | hero (kicker "ഇന്നലത്തെ വാക്ക് കിട്ടിയോ?", title "വാക്ക് #N") · tiles (clue = meaning; first box green, rest blank) · answer (big word, all-green tiles, transliteration · meaning) · screen (/wordle/, 3 points from games.json facts) · cta | hook · tiles · text "കിട്ടിയോ?" with sub "3 · 2 · 1" · answer · screen · cta |
-| vaakku `how-to-play` | hero · screen · steps (3) · list (colours) · cta | hook · screen · steps · cta |
-| vaakku `streak-awards` | hero · list (the four awards with days) · screen · cta | hook · list as text scenes · cta |
-| paryayam `yesterday-synonyms` | hero ("ഇന്നലത്തെ വാക്ക്: <word>") · tiles (5 blank tiles, sub = English sense) · answer (five synonyms as tiles) · screen (/paryayam/) · cta | hook · tiles · text "കിട്ടിയോ?" · answer · cta |
-| thaaranira `cast-puzzle` | hero · cast (first 3 names, hidden 2) · answer (title (year), director, genres · IMDb) · screen (/cast/) · cta | hook · cast (first 4, hidden 1) · text countdown · answer · screen · cta |
-| katha `story-puzzle` | hero · story (the plot with ███, under 330 characters; cut whole sentences) · answer (title, year, director, lead) · screen (/plot/) · cta | hook · story · text countdown · answer · cta |
-| aadyam `which-first` | hero · pair (no dates) · pair (showDates, firstIndex = the first) · screen (/first/) · cta | hook · pair · text countdown · pair with dates · cta |
-| ashwamedham `challenge` / `how-it-works` | hero · steps (think, answer, it names it) · screen (/ashwamedham/) · list (facts) · cta (question: "Did it get your film?") | hook · steps · screen · cta |
-| antakshari `letter-challenge` | hero (letter) · list ("Name five films starting with <L>") · answer (big letter, details = top 5 films with years) · screen (/antakshari/) · cta | hook · text challenge · answer · cta |
-| kerala-guesser `where-is-it` | hero · map (svg = facts.guesser.mapSvg, place = Malayalam + English name) · answer (svg = answerSvg, big = place) · screen (/guesser/) · cta | hook · map · text countdown · answer · cta |
-| kerala-guesser `levels` | hero · list (three levels with counts) · screen · cta | hook · list scenes · screen · cta |
-| thurupp `how-to-play-28` / `play-with-friends` | hero · steps or list (facts) · screen (/thurupp/public/) · cta | hook · steps · screen · cta |
-| cidmoosa `gadgets` / `route` | hero · list (gadgets) or map (svg = facts.cidmoosaRoute.svg, place "തിരുവനന്തപുരം → കാസർഗോഡ്") · list (facts) · cta | hook · map · text scenes · cta |
-| sat `the-tharavad` / `how-to-play` | hero · list (the tharavad and its hiding places) · steps (count, hide, race and shout SAT!) · cta | hook · list · steps · cta |
-| general `daily-four` | hero (game null) · logos (games = the four, highlight all) · screen (front page /) · list (new at midnight, streaks, a lamp for each) · cta | hook · logos · screen · cta |
-| general `front-page` | hero · screen (/) · list (the Pooram, both calendars) · cta | hook · screen · cta |
-| general `streaks` | hero · list (awards) · logos (four daily) · cta | hook · list · cta |
-| general `weekend-challenge` | hero · logos (four daily) · steps (play all four, screenshot, comment) · cta | hook · logos · steps · cta |
-| general `all-games` | hero · logos (all) · list (free, no ads, no login, Malayalam and English, phone and computer) · cta | hook · logos · cta |
+| thaaranira `cast-puzzle` | "4 സൂചന" · "1 സിനിമ" · tag "എത്ര സൂചനയിൽ പറയും?" | **the model reel, exactly**: clues (headline "ഏതാ പടം?", first 4 cast names in IMDb order, transliterated, one per beat, hidden 1) · countdown · answer (kicker "ഉത്തരം", big = title in Malayalam, chips year + "IMDb x.x", detail = director; 2nd beat question "എത്രാമത്തെ സൂചനയിൽ കിട്ടി? കമന്റ് ചെയ്യൂ!") · cta (shot /cast/) |
+| thaaranira `how-to-play` | "താരനിര" · tag "പേര് കേട്ട് പടം പറയാമോ?" | steps (the 3 facts, short) · screen (/cast/) · cta |
+| vaakku `yesterday-word` | "N അക്ഷരം" · mid "അർത്ഥം: <meaning>" · tag "ഇന്നലത്തെ വാക്ക് പറയാമോ?" | tiles (headline "വാക്ക് #N", first box green with the first akshara, rest blank; sub = meaning) · countdown · answer (big = word, tiles = all aksharas green; question "എത്രാമത്തെ ശ്രമത്തിൽ കിട്ടി? കമന്റ് ചെയ്യൂ!") · cta (shot /wordle/) |
+| vaakku `how-to-play` | "മലയാളം വേർഡിൽ!" · tag "കളിച്ചിട്ടുണ്ടോ?" | steps (3, from facts) · cards, not numbered (the colours) · cta (shot) |
+| vaakku `streak-awards` | "ദിവസവും കളിച്ചാൽ?" · tag "സമ്മാനം!" | cards (the four awards with days, one per beat) · text (question "നിങ്ങളുടെ സ്ട്രീക്ക് എത്ര?") · cta |
+| paryayam `yesterday-synonyms` | big = the word · mid "5 പര്യായങ്ങൾ" · tag "എത്രയെണ്ണം അറിയാം?" | tiles (5 blank tiles, sub = English sense) · countdown · answer (big = word, tiles = the five, green; question "എത്രയെണ്ണം കിട്ടി? കമന്റ് ചെയ്യൂ!") · cta (shot /paryayam/) |
+| katha `story-puzzle` | "ഒറ്റ വരി കഥ" · tag "ഏതാ പടം?" | story (the plot as one Malayalam sentence, faithful to facts, ███ kept, under 140 characters, "min": 3.2) · countdown · answer (title, chips year + director, detail = lead; question "കഥ കേട്ട് കിട്ടിയോ?") · cta (shot /plot/) |
+| aadyam `which-first` | mid "ഏത് പടമാണ് ആദ്യം?" · tag "A ഓ B ഓ?" | pair (no dates; beat 1 says film A, beat 2 film B) · countdown · pair (showDates, firstIndex; a "reveal" beat "<first> ആദ്യം!") · text (question "നിങ്ങൾ ശരിയാക്കിയോ? കമന്റ് ചെയ്യൂ!") · cta (shot /first/) |
+| ashwamedham `challenge` / `how-it-works` | "ഒരു പടം മനസ്സിൽ വിചാരിക്കൂ" (mid) · tag "അശ്വമേധം കണ്ടുപിടിക്കും!" | steps (think, answer, it names it) · screen (/ashwamedham/) · cta (side "നിങ്ങളുടെ പടം\nകിട്ടിയോ?") |
+| antakshari `letter-challenge` | big = the letter · mid "5 പടങ്ങൾ" · tag "പറയാമോ?" | countdown · cards (numbered: the top 5 films with years, transliterated, one per beat) · text (question "നിങ്ങൾ എത്ര പറഞ്ഞു? കമന്റ് ചെയ്യൂ!") · cta (shot /antakshari/) |
+| kerala-guesser `where-is-it` | big = the place name (facts.guesser.place.ml) · mid "മാപ്പിൽ എവിടെ?" · tag "ഒറ്റ നോട്ടത്തിൽ പറയാമോ?" | The game names a place and you find it on a blank map. map (headline "എവിടെയാണ് <place>?", svg = facts.guesser.mapSvg (blank), place = the level in Malayalam, e.g. "നിയമസഭാ മണ്ഡലം"; beats: the level, then "വടക്കോ, മധ്യത്തിലോ, തെക്കോ?" with "place": true) · countdown · answer (kicker "ഇവിടെ!", big = place, svg = answerSvg (the renderer rings the red spot), chips "<district> ജില്ല"; beat 1 "<district> ജില്ലയിൽ!", beat 2 question "എത്ര അടുത്തെത്തി? കമന്റ് ചെയ്യൂ!") · cta (shot /guesser/, side "140 മണ്ഡലങ്ങൾ\n1,034 തദ്ദേശങ്ങൾ") |
+| kerala-guesser `levels` | "കേരളം എത്ര അറിയാം?" · tag "മൂന്ന് ലെവൽ!" | cards (three levels with counts) · screen (/guesser/) · cta |
+| thurupp `how-to-play-28` / `play-with-friends` | "ഇരുപത്തെട്ട് കളിക്കാം!" (mid) · tag "ആളെ കൂട്ടിക്കോ!" | steps or cards (facts) · screen (/thurupp/public/) · cta |
+| cidmoosa `gadgets` / `route` | "സി.ഐ.ഡി. മൂസ" · tag "ഗെയിം കളിച്ചോ?" | map (svg = facts.cidmoosaRoute.svg, place "തിരുവനന്തപുരം → കാസർഗോഡ്") or cards (gadgets) · cards (facts) · cta |
+| sat `the-tharavad` / `how-to-play` | "സാറ്റ്!" · tag "ഒളിച്ചുകളി ഓർമ്മയുണ്ടോ?" | cards (the tharavad and its hiding places) · steps (count, hide, race and shout SAT!) · cta |
+| general `daily-four` | "4 കളികൾ" · mid "ദിവസവും പുതിയത്" · tag "ഇന്ന് എത്ര കളിച്ചു?" | logos (the four, highlight all) · screen (front page /) · cta |
+| general `front-page` | "11 കളികൾ" · tag "എല്ലാം ഒരിടത്ത്!" | screen (/) · cards (the Pooram, both calendars) · cta |
+| general `streaks` | "നിങ്ങളുടെ സ്ട്രീക്ക് എത്ര?" (mid) | cards (awards) · logos (four daily) · cta |
+| general `weekend-challenge` | "വീക്കെൻഡ് ചലഞ്ച്!" (mid) · tag "4 കളി, 1 ദിവസം" | logos (four daily) · steps (play all four, screenshot, comment) · cta |
+| general `all-games` | "11 കളികൾ" · mid "മലയാളത്തിൽ!" | logos (all) · cards, not numbered (free, no ads, no login, Malayalam and English, phone and computer) · cta |
 
 A general item has `"game": null` in the spec.
 
 ### Reel voice-over
 
-- Every scene has a `say` line: **Malayalam script only**. Transliterate names and film titles
+- One `say` per beat: **Malayalam script only**, 2-8 words. Transliterate names and film titles
   (Kumbalangi Nights → കുമ്പളങ്ങി നൈറ്റ്സ്, Mohanlal → മോഹൻലാൽ). Spell numbers as Malayalam words
-  or leave them out. Latin letters and digits come out garbled.
-- Keep each line short (8-14 words). The whole reel: about 60-85 words, 25-35 seconds. The voice now
-  speaks at roughly 2 words a second, so the old line lengths still fit.
-- The voice alternates by week on its own; don't set `voice`. Set `"date"` to the item's date.
-- The last scene's `say` invites people: "പ്ലേ കേരളം ഡോട്ട് കോമിൽ സൗജന്യമായി കളിക്കൂ. ലിങ്ക് ബയോയിൽ ഉണ്ട്."
-- Open with the hook in the first second (no slow intro) and keep the energy up to the last scene.
+  or leave them out. Latin letters and digits come out garbled (the renderer warns).
+- The first beat speaks the hook's first line, at once. Short lines with a full stop or question mark sound
+  most natural ("നാല് സൂചന." "ഒരൊറ്റ സിനിമ.").
+- On-screen text can be shorter than the voice line, but must say the same thing.
+- The voice alternates by week on its own; leave `voice` null. Set `"date"` to the item's date. Don't
+  change the speed in `voice.py`.
+- The last scene's last beat: "പ്ലേ കേരളം ഡോട്ട് കോമിൽ സൗജന്യമായി കളിക്കൂ!".
 
 ### Captions
 

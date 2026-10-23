@@ -251,7 +251,7 @@ def build_html(spec, i, total):
     color = text_color(b1)
     title = YELLOW if luminance(b1) < 125 else CREAM
     style = f"--b1:{b1};--b2:{b2};--title:{title};color:{color}"
-    return (f'<!doctype html><html lang="ml"><head><meta charset="utf-8">{fonts_head()}<style>{CSS}</style></head>'
+    return (f'<!doctype html><html><head><meta charset="utf-8">{fonts_head()}<style>{CSS}</style></head>'
             f'<body><div class="slide bg-{pattern}" style="{style}">{header(gid)}'
             f'<div class="main">{slide_body(s, gid, accent)}</div>{footer(i == total - 1)}</div></body></html>')
 

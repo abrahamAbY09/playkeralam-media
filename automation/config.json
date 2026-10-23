@@ -86,8 +86,8 @@
     "linkLine": "ലിങ്ക് ബയോയിൽ · Link in bio · playkeralam.com"
   },
   "reels": {
-    "minSeconds": 22,
-    "maxSeconds": 38,
+    "minSeconds": 12,
+    "maxSeconds": 22,
     "width": 1080,
     "height": 1920,
     "fps": 30

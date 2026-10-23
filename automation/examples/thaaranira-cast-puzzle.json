@@ -1,0 +1,34 @@
+{
+ "_about": "THE MODEL REEL, approved by Abr on 23 Oct 2026 (Thaaranira cast-puzzle, 14.4 s). Copy its shape for every reel: a hook that is on screen from frame 0 and asks the viewer something, one short voice line per beat with the matching item landing on that line, a countdown, the reveal, a comment question, then the CTA. Sounds are added by the renderer. shot.png comes from shoot.py.",
+ "game": "thaaranira",
+ "date": "2026-10-23",
+ "voice": null,
+ "scenes": [
+  {"type": "hook", "beats": [
+   {"say": "നാല് സൂചന.", "text": "4 സൂചന"},
+   {"say": "ഒരൊറ്റ സിനിമ.", "text": "1 സിനിമ"},
+   {"say": "എത്ര സൂചനയിൽ നിങ്ങൾ പറയും?", "text": "എത്ര സൂചനയിൽ പറയും?", "style": "tag"}
+  ]},
+  {"type": "clues", "headline": "ഏതാ പടം?", "hidden": 1, "beats": [
+   {"say": "ഫഹദ് ഫാസിൽ", "text": "ഫഹദ് ഫാസിൽ"},
+   {"say": "നെടുമുടി വേണു", "text": "നെടുമുടി വേണു"},
+   {"say": "സ്വാതി റെഡ്ഡി", "text": "സ്വാതി റെഡ്ഡി"},
+   {"say": "ശ്രീനാഥ് ഭാസി", "text": "ശ്രീനാഥ് ഭാസി"}
+  ]},
+  {"type": "countdown", "headline": "കിട്ടിയോ?", "beats": [
+   {"say": "കിട്ടിയോ?"},
+   {"num": "3", "dur": 0.55},
+   {"num": "2", "dur": 0.55},
+   {"num": "1", "dur": 0.55}
+  ]},
+  {"type": "answer", "kicker": "ഉത്തരം", "big": "നോർത്ത് 24 കാതം", "chips": ["2013", "IMDb 7.6"],
+   "detail": "സംവിധാനം: അനിൽ രാധാകൃഷ്ണൻ മേനോൻ", "beats": [
+   {"say": "നോർത്ത് ഇരുപത്തിനാല് കാതം!"},
+   {"say": "എത്രാമത്തെ സൂചനയിൽ കിട്ടി? കമന്റ് ചെയ്യൂ!", "question": "എത്രാമത്തെ സൂചനയിൽ കിട്ടി? കമന്റ് ചെയ്യൂ!"}
+  ]},
+  {"type": "cta", "headline": "ദിവസവും പുതിയ പടം!", "shot": "shot.png", "side": "ഓരോ തെറ്റിനും\nഒരു സൂചന കൂടി", "tail": 0.7, "beats": [
+   {"say": "ദിവസവും പുതിയ പടം!"},
+   {"say": "പ്ലേ കേരളം ഡോട്ട് കോമിൽ സൗജന്യമായി കളിക്കൂ!"}
+  ]}
+ ]
+}
