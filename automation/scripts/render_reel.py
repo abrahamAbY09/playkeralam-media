@@ -25,7 +25,7 @@ Scene types (fields; per-beat fields in [ ]):
   text      same as hook, for later scenes
   cards     headline, numbered (true), hidden (0) [say, text]   cards slam in one per beat (cast clues, facts)
   clues     = cards (cast clues)          steps = cards (numbered steps)
-  countdown headline [say] then [dur, num]          "കിട്ടിയോ?" then 3, 2, 1
+  countdown headline [say] then [dur, num]          "Got it?" then 3, 2, 1
   answer    kicker, big, chips[], detail, svg?, tiles? [say, question?]   white flash + ding on the reveal
   tiles     headline, sub, tiles[{text, color: green|yellow|grey|blue|cream|blank}] [say]
   story     headline, story [say]               one plot sentence on a card; set "min" so it can be read
@@ -34,6 +34,10 @@ Scene types (fields; per-beat fields in [ ]):
   screen    headline, shot, caption [say]
   logos     headline, games[], highlight[] [say]
   cta       headline, shot?, side? [say]         url pill + "PLAY FREE · LINK IN BIO"
+
+Language (Abr, 24 Oct 2026): the voice ("say") is Malayalam, but on-screen text is English. Only a
+puzzle's own Malayalam content (a Vaakku word and its tiles, Paryayam synonyms) stays in Malayalam,
+with its English meaning or transliteration beside it.
 
 Malayalam: the pages carry NO lang="ml". With that tag Baloo Chettan 2 switches to its reformed-script
 forms and splits every conjunct (ക്ക shows as ക്‌ക); without it the traditional kootaksharangal render.
@@ -211,7 +215,7 @@ def body_cards(s, ts):
 
 
 def body_countdown(s, ts, dur):
-    out = f'<div class="big stroke slam" style="{d(at(ts, 0, 0))};--r:-2deg;font-size:160px">{esc(s.get("headline", "കിട്ടിയോ?"))}</div>'
+    out = f'<div class="big stroke slam" style="{d(at(ts, 0, 0))};--r:-2deg;font-size:160px">{esc(s.get("headline", "Got it?"))}</div>'
     nums = [(b, t) for b, t in zip(s["beats"], ts) if "num" in b]
     over = ""
     for j, (b, t) in enumerate(nums):
@@ -289,7 +293,7 @@ def body_logos(s, ts):
     hi = set(s.get("highlight", []))
     start = at(ts, 0, 0) + 0.1
     cells = "".join(f'<div class="gi pop" style="{d(start + i * 0.06)}"><img src="{logo_uri(GAMES[g]["logo"])}" '
-                    f'style="{"outline:9px solid " + YELLOW + ";outline-offset:6px" if g in hi else ""}"><div>{esc(GAMES[g]["ml"])}</div></div>'
+                    f'style="{"outline:9px solid " + YELLOW + ";outline-offset:6px" if g in hi else ""}"><div>{esc(GAMES[g]["en"])}</div></div>'
                     for i, g in enumerate(s.get("games") or ALL_GAMES))
     return f'{headline(s)}<div class="grid">{cells}</div>'
 
@@ -365,8 +369,8 @@ def scene_html(s, i, gid, ts, dur, start, total, spec_dir):
         body = body_cta(s, ts, gid, spec_dir)
     else:
         raise SystemExit(f"Unknown scene type '{t}'")
-    head = (f'<img src="{logo_uri(game(gid)["logo"])}">{esc(game(gid)["ml"])} · {esc(game(gid)["en"])}' if gid
-            else f'{esc(CONFIG["brand"]["name_ml"])} · {esc(CONFIG["brand"]["name_en"])}')
+    head = (f'<img src="{logo_uri(game(gid)["logo"])}">{esc(game(gid)["en"])}' if gid
+            else f'{esc(CONFIG["brand"]["name_en"])}')
     # NB: no lang="ml" on <html> (it splits conjuncts in Baloo Chettan 2).
     return (f'<!doctype html><html><head><meta charset="utf-8">{fonts_head()}<style>{CSS}</style></head><body>'
             f'<div class="reel" style="--b1:{b1};--b2:{b2};--title:{title};--fg:{fg};color:{fg}"><div class="{kind}"></div>'
