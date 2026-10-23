@@ -6,8 +6,10 @@
         results.json: [{"slot": 0, "date": "...", "metricoolUuid": "...", "folder": "...", "title": "..."}, ...]
         Moves 'next' on by the slots recorded (wrapping into the next cycle) and appends to history.
 
-A plan is skipped (exit code 3) when rotation.json already has history for that week's Monday,
-so a second run in the same week does nothing.
+A weekly plan is skipped (exit code 3) when rotation.json already has history for that week's Monday.
+A daily plan runs every day (config.json "daily") and is skipped only when the daily run has already
+recorded today's reel (a history entry for today with "run": "daily"). Posts left from the old weekly run
+don't block a day: Abr wants a reel every day even when another post is scheduled for it.
 """
 import argparse
 import datetime as dt
@@ -75,19 +77,19 @@ def plan_day(run_date):
     rot = load()
     y, m, d = map(int, run_date.split("-"))
     day = dt.date(y, m, d)
-    slots = {s["weekday"]: s for s in CONFIG["week"]["slots"]}
+    daily = CONFIG["daily"]
     wd = day.strftime("%A")
-    if wd not in slots:
-        print(json.dumps({"skip": f"{run_date} is a {wd}; reels go out on {', '.join(slots)} only"}))
+    if wd not in daily["weekdays"]:
+        print(json.dumps({"skip": f"{run_date} is a {wd}; reels go out on {', '.join(daily['weekdays'])} only"}))
         sys.exit(3)
-    if any(h.get("date") == day.isoformat() for h in rot["history"]):
-        print(json.dumps({"skip": f"{run_date} already has an entry in rotation.json (scheduled earlier, or by hand)"}))
+    if any(h.get("date") == day.isoformat() and h.get("run") == "daily" for h in rot["history"]):
+        print(json.dumps({"skip": f"today's reel for {run_date} is already made and recorded in rotation.json"}))
         sys.exit(3)
     index = rot["next"] % 16
     cycle = rot["cycle"] + rot["next"] // 16
     t = slot_topic(rot, cycle, index)
     item = {"slot": 0, "rotationIndex": index, "cycle": cycle, "date": day.isoformat(), "weekday": wd,
-            "time": slots[wd]["time"], "kind": "reel", **t,
+            "time": daily["time"], "kind": "reel", "run": "daily", **t,
             "folder": f"{day.isoformat()}-{t['topic'].replace('general:', '')}-reel"}
     month_counts = {}
     for h in rot["history"]:
@@ -108,6 +110,8 @@ def record(plan_path, results_path):
         r = by_slot.get(it["slot"])
         entry = {"date": it["date"], "kind": it["kind"], "topic": it["topic"], "format": it["format"],
                  "rotationIndex": it["rotationIndex"], "cycle": it["cycle"]}
+        if it.get("run"):
+            entry["run"] = it["run"]
         if r:
             entry.update({k: v for k, v in r.items() if k != "slot"})
         else:

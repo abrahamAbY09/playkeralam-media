@@ -17,8 +17,13 @@
     "monthlyPostLimit": 20,
     "autoPublish": true
   },
+  "daily": {
+    "run": "Every day at about 08:10 India time; one reel, scheduled for 21:00 the same day",
+    "weekdays": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+    "time": "21:00"
+  },
   "week": {
-    "run": "Mon, Wed, Fri, Sat at about 08:10 India time; one reel, scheduled for 21:00 the same day",
+    "run": "Old weekly mode (plan_week.py plan), no longer used: Mon, Wed, Fri, Sat posts planned on Sunday",
     "slots": [
       {
         "weekday": "Monday",

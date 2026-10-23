@@ -1,6 +1,6 @@
 # Play Keralam Instagram: the daily reel run
 
-On Monday, Wednesday, Friday and Saturday mornings (about 8:10 India time) a fresh Claude session runs this
+Every morning, seven days a week (about 8:10 India time), a fresh Claude session runs this
 playbook. It makes **one voiced reel** for **@playkeralam** and schedules it to go out at **9:00 pm the same
 day**, fully automatically: no drafts, no approval. Abr (the owner) only gets the summary at the end. Work through the steps in
 order. If a step fails, fix it and carry on; if the reel can't be made, say which step failed and why.
@@ -20,8 +20,8 @@ goes out. There are **only reels** now: no carousels or image posts.
 - **Malayalam first**, natural and warm, the way people in Kerala talk online. A short English line follows
   in the caption. Write proper Malayalam Unicode (atomic chillus such as ൻ ർ ൽ ൾ ൺ).
 - **5 hashtags at most** (an Instagram limit), always including #PlayKeralam.
-- **One reel per run, at 9:00 pm today.** The Metricool free plan allows 20 posts a month; `plan_week.py`
-  checks that.
+- **One reel every day, at 9:00 pm today.** The Metricool free plan publishes at most 20 posts a calendar
+  month; `plan_week.py` checks that.
 - **Every reel follows the approved style** in *Reel style* below (Abr signed it off on 23 Oct 2026):
   hook first, fast, items synced to the voice, proper conjuncts. The model is
   `automation/examples/thaaranira-cast-puzzle.json`; copy its shape.
@@ -78,11 +78,16 @@ These are his three requirements, plus what made the approved sample work. Don't
 python3 automation/scripts/plan_week.py plan-day --run-date <today> > automation/work/<today>/plan.json
 ```
 
-- Exit code 3 / `"skip"`: nothing to do today (not a reel day, or today already has an entry in
-  `rotation.json`, for example a post scheduled earlier by hand). Stop and report that; do nothing else.
+- Exit code 3 / `"skip"`: today's reel is already made (`rotation.json` has a daily-run entry for today).
+  Stop and report that; do nothing else. Posts left from the old weekly run (26, 28, 30 and 31 Oct 2026) do
+  **not** block a day: Abr wants a reel every day, and a second post on those days is fine.
 - Also call Metricool `getScheduledPosts` (brandId `7540170`, today 00:00 to 23:59, timezone Asia/Calcutta).
-  If a post is already at 9 pm today, don't schedule a second one; say so and stop.
-- If `overLimit` is not empty, stop and report it; don't schedule.
+  If a REEL at 9 pm today was **created today** (its `creationDate` is today), this routine already
+  scheduled it: don't schedule a second one; say so and stop. Any other post at 9 pm today (one scheduled
+  on an earlier day) is fine: schedule today's reel as usual.
+- If `overLimit` is not empty, stop and report it; don't schedule. With a reel every day this happens
+  around the 20th of the month (Metricool's free plan publishes at most 20 posts a calendar month); say the
+  monthly cap is reached and that reels resume on the 1st.
 - **Time check.** Ask for the current India time. The reel must be scheduled for 9:00 pm today, so if
   it is already past 8:45 pm, don't schedule in the past: report it and stop.
 
