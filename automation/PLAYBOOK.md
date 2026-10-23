@@ -1,8 +1,11 @@
 # Play Keralam Instagram: the daily reel run
 
-Every morning, seven days a week (about 8:10 India time), a fresh Claude session runs this
-playbook. It makes **one voiced reel** for **@playkeralam** and schedules it to go out at **9:00 pm the same
-day**, fully automatically: no drafts, no approval. Abr (the owner) only gets the summary at the end. Work through the steps in
+Every morning (about 8:10 India time) a fresh Claude session runs this playbook. On a **posting day** it
+makes **one voiced reel** for **@playkeralam** and schedules it to go out at **9:00 pm the same day**, fully
+automatically: no drafts, no approval. Posting days are listed month by month in `config.json` →
+`daily.postDates`. Abr's rule (23 Oct 2026), made to fit Metricool's free plan of 20 published posts a month:
+every Tuesday, Thursday, Saturday and Sunday, plus what the cap leaves spread evenly over Mondays, Wednesdays
+and Fridays through the month. On any other day the run stops at step 2. Abr (the owner) only gets the summary at the end. Work through the steps in
 order. If a step fails, fix it and carry on; if the reel can't be made, say which step failed and why.
 
 Times are India time (Asia/Calcutta). "Today" is the day the run starts, and it is also the day the reel
@@ -20,8 +23,8 @@ goes out. There are **only reels** now: no carousels or image posts.
 - **Malayalam first**, natural and warm, the way people in Kerala talk online. A short English line follows
   in the caption. Write proper Malayalam Unicode (atomic chillus such as ൻ ർ ൽ ൾ ൺ).
 - **5 hashtags at most** (an Instagram limit), always including #PlayKeralam.
-- **One reel every day, at 9:00 pm today.** The Metricool free plan publishes at most 20 posts a calendar
-  month; `plan_week.py` checks that.
+- **One reel per posting day, at 9:00 pm today.** The Metricool free plan publishes at most 20 posts a
+  calendar month; the posting calendar is built to stay within it, and `plan_week.py` checks it too.
 - **Every reel follows the approved style** in *Reel style* below (Abr signed it off on 23 Oct 2026):
   hook first, fast, items synced to the voice, proper conjuncts. The model is
   `automation/examples/thaaranira-cast-puzzle.json`; copy its shape.
@@ -78,16 +81,18 @@ These are his three requirements, plus what made the approved sample work. Don't
 python3 automation/scripts/plan_week.py plan-day --run-date <today> > automation/work/<today>/plan.json
 ```
 
-- Exit code 3 / `"skip"`: today's reel is already made (`rotation.json` has a daily-run entry for today).
-  Stop and report that; do nothing else. Posts left from the old weekly run (26, 28, 30 and 31 Oct 2026) do
-  **not** block a day: Abr wants a reel every day, and a second post on those days is fine.
+- Exit code 3 / `"skip"`: no reel today. Either today isn't a posting day in `daily.postDates`, or today's
+  reel is already made (`rotation.json` has a daily-run entry for today). Stop and report it in one line;
+  do nothing else. If the skip says the month has **no posting calendar yet**, also send a push notification
+  telling Abr the calendar has run out and needs extending (`plan_week.py calendar --month YYYY-MM` builds a
+  month by his rule). Posts left from the old weekly run (26, 28, 30 and 31 Oct 2026) do **not** block a
+  posting day: a second post on those days is fine.
 - Also call Metricool `getScheduledPosts` (brandId `7540170`, today 00:00 to 23:59, timezone Asia/Calcutta).
   If a REEL at 9 pm today was **created today** (its `creationDate` is today), this routine already
   scheduled it: don't schedule a second one; say so and stop. Any other post at 9 pm today (one scheduled
   on an earlier day) is fine: schedule today's reel as usual.
-- If `overLimit` is not empty, stop and report it; don't schedule. With a reel every day this happens
-  around the 20th of the month (Metricool's free plan publishes at most 20 posts a calendar month); say the
-  monthly cap is reached and that reels resume on the 1st.
+- If `overLimit` is not empty, stop and report it; don't schedule. The posting calendar keeps each month at
+  20 posts at most (Metricool's free plan cap), so this only happens if extra posts were added by hand.
 - **Time check.** Ask for the current India time. The reel must be scheduled for 9:00 pm today, so if
   it is already past 8:45 pm, don't schedule in the past: report it and stop.
 
