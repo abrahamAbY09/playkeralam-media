@@ -14,7 +14,8 @@ fi
 # the cloud runner: pip was 3.13, python3 was 3.11), which left the scripts unable to import what was installed.
 PY=python3
 echo "using $($PY --version 2>&1) at $(command -v $PY)"
-$PY -c "import sherpa_onnx" 2>/dev/null || $PY -m pip install --quiet --break-system-packages sherpa-onnx
+# sherpa-onnx 2.x dropped the espeak frontend the Piper voices need ("phoneme_codepoints is empty"); stay on 1.13.
+$PY -c "import sherpa_onnx, sys; sys.exit(0 if sherpa_onnx.__version__.startswith('1.') else 1)" 2>/dev/null || $PY -m pip install --quiet --break-system-packages "sherpa-onnx==1.13.8"
 $PY -c "import playwright" 2>/dev/null || $PY -m pip install --quiet --break-system-packages playwright
 $PY -c "import numpy, PIL" 2>/dev/null || $PY -m pip install --quiet --break-system-packages numpy pillow
 
