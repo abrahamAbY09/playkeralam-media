@@ -1,0 +1,6 @@
+c7773a36741a5d469d9f057e0b61b3656b980d38	refs/heads/claude/gracious-mccarthy-ri3iu2
+4b8d5305037e4ef19cff93aaaedcbf3d51e50da6	refs/heads/claude/jolly-mccarthy-xt8mi1
+exit=0
+--- git remote -v ---
+origin	https://github.com/abrahamAbY09/playkeralam-media (fetch)
+origin	https://github.com/abrahamAbY09/playkeralam-media (push)
