@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 5,
+  "next": 6,
   "history": [
     {
       "date": "2026-10-20",
@@ -118,6 +118,19 @@
       "folder": "2026-10-23-paryayam-reel",
       "title": "Paryayam #22 yesterday's synonyms (നക്ഷത്രം)",
       "run": "daily"
+    },
+    {
+      "date": "2026-10-25",
+      "kind": "reel",
+      "topic": "kerala-guesser",
+      "format": "where-is-it",
+      "rotationIndex": 5,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "2968742330359893836",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=2968742330359893836",
+      "folder": "2026-10-25-kerala-guesser-reel",
+      "title": "Kerala Guesser where-is-it reel: Thiruvalla"
     }
   ]
 }
