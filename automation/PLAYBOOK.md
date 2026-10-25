@@ -69,9 +69,13 @@ These are his three requirements, plus what made the approved sample work. Don't
 
 ## 1. Set up (about 5 minutes)
 
-1. Attach the two repositories with `add_repo` and clone each exactly as its result says:
-   - `abrahamAbY09/playkeralam-media` with `access: "push"` (this repo; media and this playbook).
-   - `abrahamAbY09/Keralamtimes` with `access: "read"` (the games' code and data; private, read only).
+1. Clone the two repositories:
+   - `abrahamAbY09/playkeralam-media`, pushed to (this repo; media and this playbook).
+   - `abrahamAbY09/Keralamtimes`, read only (the games' code and data; private).
+   The scheduled run has both repos attached already (the task was created from a chat that had them, on
+   25 Oct 2026), so a plain `git clone --depth 1 https://github.com/abrahamAbY09/<repo>.git` works. Scheduled
+   runs are **not** given the `add_repo` tool; don't search for it. (In an interactive chat without the repos,
+   attach them with `add_repo` first: playkeralam-media with `access: "push"`, Keralamtimes with `"read"`.)
 2. In the Keralamtimes clone, use the site branch: `config.json` → `repos.site.branchHint`. Fetch it with
    `git fetch --depth 1 origin <branch>` and check out `FETCH_HEAD` into a worktree, say `../site`.
    If that branch is gone, list branches with `git ls-remote --heads origin`, fetch each with depth 1 and
