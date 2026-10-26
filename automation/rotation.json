@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 6,
+  "next": 7,
   "history": [
     {
       "date": "2026-10-20",
@@ -131,6 +131,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=2968742330359893836",
       "folder": "2026-10-25-kerala-guesser-reel",
       "title": "Kerala Guesser where-is-it reel: Thiruvalla"
+    },
+    {
+      "date": "2026-10-26",
+      "kind": "reel",
+      "topic": "thurupp",
+      "format": "how-to-play-28",
+      "rotationIndex": 6,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "5613836524793710978",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5613836524793710978",
+      "folder": "2026-10-26-thurupp-reel",
+      "title": "Thurupp: how to play 28 (reel)"
     }
   ]
 }
