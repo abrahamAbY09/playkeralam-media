@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 7,
+  "next": 8,
   "history": [
     {
       "date": "2026-10-20",
@@ -144,6 +144,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5613836524793710978",
       "folder": "2026-10-26-thurupp-reel",
       "title": "Thurupp: how to play 28 (reel)"
+    },
+    {
+      "date": "2026-10-27",
+      "kind": "reel",
+      "topic": "general:front-page",
+      "format": "front-page",
+      "rotationIndex": 7,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "4997093246563927836",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=4997093246563927836",
+      "folder": "2026-10-27-front-page-reel",
+      "title": "Front page: the Pooram at night (reel)"
     }
   ]
 }
