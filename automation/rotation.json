@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 8,
+  "next": 9,
   "history": [
     {
       "date": "2026-10-20",
@@ -157,6 +157,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=4997093246563927836",
       "folder": "2026-10-27-front-page-reel",
       "title": "Front page: the Pooram at night (reel)"
+    },
+    {
+      "date": "2026-10-28",
+      "kind": "reel",
+      "topic": "katha",
+      "format": "story-puzzle",
+      "rotationIndex": 8,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "-4959268109634679647",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-4959268109634679647",
+      "folder": "2026-10-28-katha-reel",
+      "title": "Katha story-puzzle #34 (Traffic)"
     }
   ]
 }
