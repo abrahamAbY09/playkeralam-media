@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 9,
+  "next": 10,
   "history": [
     {
       "date": "2026-10-20",
@@ -170,6 +170,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-4959268109634679647",
       "folder": "2026-10-28-katha-reel",
       "title": "Katha story-puzzle #34 (Traffic)"
+    },
+    {
+      "date": "2026-10-29",
+      "kind": "reel",
+      "topic": "aadyam",
+      "format": "which-first",
+      "rotationIndex": 9,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "-5440090471413103057",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-5440090471413103057",
+      "folder": "2026-10-29-aadyam-reel",
+      "title": "Aadyam which-first: Aanandhapuram Diaries vs Oru Vadakkan Selfie"
     }
   ]
 }
