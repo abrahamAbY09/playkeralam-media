@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 10,
+  "next": 11,
   "history": [
     {
       "date": "2026-10-20",
@@ -183,6 +183,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-5440090471413103057",
       "folder": "2026-10-29-aadyam-reel",
       "title": "Aadyam which-first: Aanandhapuram Diaries vs Oru Vadakkan Selfie"
+    },
+    {
+      "date": "2026-10-30",
+      "kind": "reel",
+      "topic": "sat",
+      "format": "the-tharavad",
+      "rotationIndex": 10,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "7975771128865308926",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=7975771128865308926",
+      "folder": "2026-10-30-sat-reel",
+      "title": "SAT! the tharavad: hide-and-seek in 3D, hiding places and how to play"
     }
   ]
 }
