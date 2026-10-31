@@ -295,7 +295,9 @@ def body_logos(s, ts):
     cells = "".join(f'<div class="gi pop" style="{d(start + i * 0.06)}"><img src="{logo_uri(GAMES[g]["logo"])}" '
                     f'style="{"outline:9px solid " + YELLOW + ";outline-offset:6px" if g in hi else ""}"><div>{esc(GAMES[g]["en"])}</div></div>'
                     for i, g in enumerate(s.get("games") or ALL_GAMES))
-    return f'{headline(s)}<div class="grid">{cells}</div>'
+    n = len(s.get("games") or ALL_GAMES)
+    cols = ' style="grid-template-columns:repeat(2,1fr);max-width:640px"' if n in (2, 4) else ""  # 2x2, not 3+1
+    return f'{headline(s)}<div class="grid"{cols}>{cells}</div>'
 
 
 def body_cta(s, ts, gid, spec_dir):
