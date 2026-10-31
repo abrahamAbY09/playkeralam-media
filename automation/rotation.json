@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 11,
+  "next": 12,
   "history": [
     {
       "date": "2026-10-20",
@@ -196,6 +196,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=7975771128865308926",
       "folder": "2026-10-30-sat-reel",
       "title": "SAT! the tharavad: hide-and-seek in 3D, hiding places and how to play"
+    },
+    {
+      "date": "2026-10-31",
+      "kind": "reel",
+      "topic": "general:streaks",
+      "format": "streaks",
+      "rotationIndex": 11,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "5214809018766869279",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5214809018766869279",
+      "folder": "2026-10-31-streaks-reel",
+      "title": "Streaks: Vaakku's streak awards, four daily streaks, a lamp per game (reel)"
     }
   ]
 }
