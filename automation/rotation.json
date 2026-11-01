@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 12,
+  "next": 13,
   "history": [
     {
       "date": "2026-10-20",
@@ -209,6 +209,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5214809018766869279",
       "folder": "2026-10-31-streaks-reel",
       "title": "Streaks: Vaakku's streak awards, four daily streaks, a lamp per game (reel)"
+    },
+    {
+      "date": "2026-11-01",
+      "kind": "reel",
+      "topic": "antakshari",
+      "format": "letter-challenge",
+      "rotationIndex": 12,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "-8648465494558357669",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-8648465494558357669",
+      "folder": "2026-11-01-antakshari-reel",
+      "title": "Antakshari letter challenge: 5 films starting with S"
     }
   ]
 }
