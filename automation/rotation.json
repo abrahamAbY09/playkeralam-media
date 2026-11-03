@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 0,
-  "next": 13,
+  "next": 14,
   "history": [
     {
       "date": "2026-10-20",
@@ -222,6 +222,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-8648465494558357669",
       "folder": "2026-11-01-antakshari-reel",
       "title": "Antakshari letter challenge: 5 films starting with S"
+    },
+    {
+      "date": "2026-11-03",
+      "kind": "reel",
+      "topic": "ashwamedham",
+      "format": "challenge",
+      "rotationIndex": 13,
+      "cycle": 0,
+      "run": "daily",
+      "metricoolUuid": "7941017429612905889",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=7941017429612905889",
+      "folder": "2026-11-03-ashwamedham-reel",
+      "title": "Ashwamedham challenge: think of a film, it guesses it"
     }
   ]
 }
