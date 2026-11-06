@@ -86,6 +86,25 @@
       ],
       "shot": "/plot/"
     },
+    "psc": {
+      "ml": "പി.എസ്.സി. ക്വിസ്",
+      "en": "PSC Quiz",
+      "path": "/psc/",
+      "logo": "psc.svg",
+      "color": "#2D3E8B",
+      "kind": "daily",
+      "pitch_en": "Ten Kerala PSC-style questions a day, one from each of ten subjects.",
+      "pitch_ml": "ദിവസവും പത്ത് കേരള പി.എസ്.സി. മാതൃകാ ചോദ്യങ്ങൾ.",
+      "facts": [
+        "Ten multiple-choice questions a day, one from each of ten subjects common to the SSLC, Plus Two and Degree level syllabi.",
+        "Every question and its one-line explanation is in Malayalam and in English.",
+        "A study aid; it is not connected to the Kerala Public Service Commission.",
+        "The top of the page shows today's date in Malayalam and a 'Today in history' line."
+      ],
+      "formats": [],
+      "shot": "/psc/",
+      "_note": "Added 2026-11-06: on the site since v1.8.0 (2 Nov 2026); not in the reel rotation yet."
+    },
     "aadyam": {
       "ml": "ആദ്യം",
       "en": "Aadyam",

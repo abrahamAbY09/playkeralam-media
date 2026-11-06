@@ -35,7 +35,7 @@ from common import (BLUE, CONFIG, CREAM, DARK, GAMES, GREEN, INK, PINK, RED, YEL
 
 W, H = CONFIG["posts"]["width"], CONFIG["posts"]["height"]
 SPEC_DIR = pathlib.Path.cwd()
-ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "aadyam", "ashwamedham",
+ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "psc", "aadyam", "ashwamedham",
              "antakshari", "kerala-guesser", "thurupp", "cidmoosa", "sat"]
 
 CSS = f"""

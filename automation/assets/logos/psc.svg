@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PSC Quiz">
+<title>PSC Quiz</title>
+<rect width="64" height="64" rx="14" fill="#7B2D26"/>
+<rect x="13" y="9" width="38" height="46" rx="5" fill="#FBF3E2"/>
+<g fill="none" stroke="#7B2D26" stroke-width="2.4">
+<circle cx="23" cy="20" r="4.3"/>
+<circle cx="23" cy="31" r="4.3"/>
+<circle cx="23" cy="42" r="4.3"/>
+</g>
+<circle cx="23" cy="31" r="4.3" fill="#C9962B" stroke="#7B2D26" stroke-width="2.4"/>
+<path d="M20.9 31.2l1.5 1.6 3-3.5" fill="none" stroke="#7B2D26" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<g stroke="#7B2D26" stroke-width="2.6" stroke-linecap="round" opacity="0.75">
+<line x1="32" y1="20" x2="44" y2="20"/>
+<line x1="32" y1="31" x2="42" y2="31"/>
+<line x1="32" y1="42" x2="45" y2="42"/>
+</g>
+</svg>

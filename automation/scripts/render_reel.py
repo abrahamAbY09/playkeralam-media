@@ -65,7 +65,7 @@ W, H, FPS, SR = CONFIG["reels"]["width"], CONFIG["reels"]["height"], CONFIG["ree
 GAP = 0.14        # silence between two voice beats in a scene
 LEAD = 0.06       # before the first beat of a scene (0 for the very first scene)
 TAIL = 0.38       # after the last beat, before the cut
-ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "aadyam", "ashwamedham",
+ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "psc", "aadyam", "ashwamedham",
              "antakshari", "kerala-guesser", "thurupp", "cidmoosa", "sat"]
 WARN = []
 
