@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 0,
+  "next": 1,
   "history": [
     {
       "date": "2026-10-20",
@@ -261,6 +261,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-6153160578843654476",
       "folder": "2026-11-06-all-games-reel",
       "title": "All 12 games at a glance (12 games, all in Malayalam)"
+    },
+    {
+      "date": "2026-11-07",
+      "kind": "reel",
+      "topic": "paryayam",
+      "format": "how-to-play",
+      "rotationIndex": 0,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "6411845298321902049",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=6411845298321902049",
+      "folder": "2026-11-07-paryayam-reel",
+      "title": "Paryayam how-to-play, yesterday word buddhi"
     }
   ]
 }
