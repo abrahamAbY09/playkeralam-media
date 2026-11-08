@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 1,
+  "next": 2,
   "history": [
     {
       "date": "2026-10-20",
@@ -274,6 +274,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=6411845298321902049",
       "folder": "2026-11-07-paryayam-reel",
       "title": "Paryayam how-to-play, yesterday word buddhi"
+    },
+    {
+      "date": "2026-11-08",
+      "kind": "reel",
+      "topic": "kerala-guesser",
+      "format": "levels",
+      "rotationIndex": 1,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "6882070589995043228",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=6882070589995043228",
+      "folder": "2026-11-08-kerala-guesser-reel",
+      "title": "Kerala Guesser levels: 14 districts, 140 constituencies, 1,034 local bodies"
     }
   ]
 }
