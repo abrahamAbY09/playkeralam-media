@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 2,
+  "next": 3,
   "history": [
     {
       "date": "2026-10-20",
@@ -287,6 +287,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=6882070589995043228",
       "folder": "2026-11-08-kerala-guesser-reel",
       "title": "Kerala Guesser levels: 14 districts, 140 constituencies, 1,034 local bodies"
+    },
+    {
+      "date": "2026-11-10",
+      "kind": "reel",
+      "topic": "thurupp",
+      "format": "play-with-friends",
+      "rotationIndex": 2,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "8811207540904643215",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=8811207540904643215",
+      "folder": "2026-11-10-thurupp-reel",
+      "title": "Thurupp: play 28 with friends (room code, bots fill seats)"
     }
   ]
 }
