@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 3,
+  "next": 4,
   "history": [
     {
       "date": "2026-10-20",
@@ -300,6 +300,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=8811207540904643215",
       "folder": "2026-11-10-thurupp-reel",
       "title": "Thurupp: play 28 with friends (room code, bots fill seats)"
+    },
+    {
+      "date": "2026-11-12",
+      "kind": "reel",
+      "topic": "general:front-page",
+      "format": "front-page",
+      "rotationIndex": 3,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "-2342339649037711151",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-2342339649037711151",
+      "folder": "2026-11-12-front-page-reel",
+      "title": "Front page: 12 games on one page, a Pooram at night"
     }
   ]
 }
