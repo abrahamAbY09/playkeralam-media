@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 4,
+  "next": 5,
   "history": [
     {
       "date": "2026-10-20",
@@ -313,6 +313,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-2342339649037711151",
       "folder": "2026-11-12-front-page-reel",
       "title": "Front page: 12 games on one page, a Pooram at night"
+    },
+    {
+      "date": "2026-11-14",
+      "kind": "reel",
+      "topic": "katha",
+      "format": "how-to-play",
+      "rotationIndex": 4,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "5517869887015174352",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5517869887015174352",
+      "folder": "2026-11-14-katha-reel",
+      "title": "Katha how-to-play (reel)"
     }
   ]
 }
