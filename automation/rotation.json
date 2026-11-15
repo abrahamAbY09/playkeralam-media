@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 5,
+  "next": 6,
   "history": [
     {
       "date": "2026-10-20",
@@ -326,6 +326,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5517869887015174352",
       "folder": "2026-11-14-katha-reel",
       "title": "Katha how-to-play (reel)"
+    },
+    {
+      "date": "2026-11-15",
+      "kind": "reel",
+      "topic": "aadyam",
+      "format": "how-to-play",
+      "rotationIndex": 5,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "5024876962239496400",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5024876962239496400",
+      "folder": "2026-11-15-aadyam-reel",
+      "title": "Aadyam how-to-play: Adharvam vs Chandralekha, then the rules"
     }
   ]
 }
