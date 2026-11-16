@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 6,
+  "next": 7,
   "history": [
     {
       "date": "2026-10-20",
@@ -339,6 +339,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=5024876962239496400",
       "folder": "2026-11-15-aadyam-reel",
       "title": "Aadyam how-to-play: Adharvam vs Chandralekha, then the rules"
+    },
+    {
+      "date": "2026-11-16",
+      "kind": "reel",
+      "topic": "sat",
+      "format": "how-to-play",
+      "rotationIndex": 6,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "4577454608795976798",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=4577454608795976798",
+      "folder": "2026-11-16-sat-reel",
+      "title": "SAT! how to play: count, hide, race to the wall and shout SAT; up to 10 players, online rooms"
     }
   ]
 }
