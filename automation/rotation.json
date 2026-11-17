@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 7,
+  "next": 8,
   "history": [
     {
       "date": "2026-10-20",
@@ -352,6 +352,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=4577454608795976798",
       "folder": "2026-11-16-sat-reel",
       "title": "SAT! how to play: count, hide, race to the wall and shout SAT; up to 10 players, online rooms"
+    },
+    {
+      "date": "2026-11-17",
+      "kind": "reel",
+      "topic": "general:streaks",
+      "format": "streaks",
+      "rotationIndex": 7,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "-6596874076450960089",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-6596874076450960089",
+      "folder": "2026-11-17-streaks-reel",
+      "title": "Streaks reel: Vaakku streak awards, four daily streaks"
     }
   ]
 }
