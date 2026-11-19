@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 8,
+  "next": 9,
   "history": [
     {
       "date": "2026-10-20",
@@ -365,6 +365,19 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-6596874076450960089",
       "folder": "2026-11-17-streaks-reel",
       "title": "Streaks reel: Vaakku streak awards, four daily streaks"
+    },
+    {
+      "date": "2026-11-19",
+      "kind": "reel",
+      "topic": "antakshari",
+      "format": "how-to-use",
+      "rotationIndex": 8,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "6438441572949445803",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=6438441572949445803",
+      "folder": "2026-11-19-antakshari-reel",
+      "title": "Antakshari helper how-to-use reel"
     }
   ]
 }
