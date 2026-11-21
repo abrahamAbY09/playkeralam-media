@@ -39,7 +39,7 @@
     "all-games"
   ],
   "cycle": 1,
-  "next": 9,
+  "next": 10,
   "history": [
     {
       "date": "2026-10-20",
@@ -378,6 +378,25 @@
       "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=6438441572949445803",
       "folder": "2026-11-19-antakshari-reel",
       "title": "Antakshari helper how-to-use reel"
+    },
+    {
+      "date": "2026-11-21",
+      "kind": "reel",
+      "topic": "ashwamedham",
+      "format": "how-it-works",
+      "rotationIndex": 9,
+      "cycle": 1,
+      "run": "daily",
+      "metricoolUuid": "-8422377691846915447",
+      "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-8422377691846915447",
+      "folder": "2026-11-21-ashwamedham-reel",
+      "title": "Ashwamedham: it guesses Manichitrathazhu in 8 questions (real game run); comment a film it can't guess",
+      "look": {
+        "theme": "studio",
+        "palette": "night teal #071419/#1F5F74, spotlight gold #F2B33D, warm white",
+        "background": "dark TV quiz-show stage, swaying spotlight cones, gold perspective grid floor, outlined gold question mark; real game screen large (blurred copy behind)",
+        "font": "Baloo Chettan 2 800, plain (no sticker strokes)"
+      }
     }
   ]
 }
