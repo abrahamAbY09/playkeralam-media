@@ -38,6 +38,18 @@ goes out. There are **only reels** now: no carousels or image posts.
 
 ## Reel style (approved by Abr, 23 Oct 2026)
 
+> **20 Nov 2026: the scroll-stopping "B" rules in the scheduled task's prompt now override this section,
+> the recipes table and `examples/thaaranira-cast-puzzle.json` wherever they conflict.** In short: four
+> beats in 13-17 s (hook 0-2 s on frame 0, core, payoff, loop + one specific share trigger + playkeralam.com);
+> at most 6 on-screen words per beat; no rule, step or feature lists; no separate "Got it?" / 3-2-1
+> countdown; show the real game large or a real scenario; a new look each time, never repeating any of the
+> last 3 (see `look` in rotation.json); no sunburst, polka dots, stacked cream cards, badge pill, bottom
+> CTA pill or small floating phone; text only in the Reels safe zone (y 270-1250, x 65-960); motion in
+> every beat. Use this section and the example only for the spec format and renderer mechanics.
+> The first B-rules look is `"theme": "studio"` (`scripts/studio.py`, 21 Nov 2026: night-teal TV quiz stage,
+> swaying spotlights, gold grid floor, the game's real screen large; scene types hook, quiz, reveal, loop).
+> Add new themes there or beside it rather than falling back to the old template.
+
 These are his three requirements, plus what made the approved sample work. Don't loosen them.
 
 1. **Open with something catchy, then follow up.** The first scene is always a `hook`: a challenge or

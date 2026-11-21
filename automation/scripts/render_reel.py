@@ -59,6 +59,7 @@ from common import (BLUE, CONFIG, CREAM, GAMES, GREEN, INK, PINK, RED, YELLOW, Y
                     badge_uri, fonts_head, game, is_dark, launch_chromium, logo_uri, shade)
 from common import esc as _esc  # noqa: E402
 import sound  # noqa: E402
+import studio  # noqa: E402
 from voice import speak, voice_for_week  # noqa: E402
 
 W, H, FPS, SR = CONFIG["reels"]["width"], CONFIG["reels"]["height"], CONFIG["reels"]["fps"], 44100
@@ -68,6 +69,7 @@ TAIL = 0.38       # after the last beat, before the cut
 ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "psc", "aadyam", "ashwamedham",
              "antakshari", "kerala-guesser", "thurupp", "cidmoosa", "sat"]
 WARN = []
+THEME = {"name": None}   # set from spec["theme"]; "studio" = the B-rules look in studio.py
 
 
 def clean(text):
@@ -329,7 +331,7 @@ MARK_JS = """<script>document.querySelectorAll('.mapbox svg').forEach(svg => {
 
 # Big lines shrink until they fit the safe width (a long place or film name must never run off the edge).
 # Run after the fonts have loaded.
-FIT_JS = """() => { document.querySelectorAll('.stage .big, .stage .mid, .stage .h2').forEach(el => {
+FIT_JS = """() => { document.querySelectorAll('.stage .big, .stage .mid, .stage .h2, .stage .fit').forEach(el => {
   let fs = parseFloat(getComputedStyle(el).fontSize);
   while (el.scrollWidth > el.clientWidth + 2 && fs > 56) { fs -= 4; el.style.fontSize = fs + 'px'; } }); return true; }"""
 
@@ -337,6 +339,8 @@ LOOKS = {"hook": "accent", "answer": "accent", "cta": "accent", "countdown": "ye
 
 
 def scene_html(s, i, gid, ts, dur, start, total, spec_dir):
+    if THEME["name"] == "studio":
+        return studio.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
     accent = game(gid)["color"] if gid else BLUE
     t = s["type"]
     look = LOOKS.get(t, "pale" if i % 2 else "soft")
@@ -388,8 +392,10 @@ def default_sfx(scene_type, scene_index, beat_index, beat):
         return "tick"
     if scene_type in ("hook", "text"):
         return "boom" if scene_index == 0 and beat_index == 0 else ("pop" if beat.get("text") else None)
-    if scene_type == "answer":
+    if scene_type in ("answer", "reveal"):
         return "ding" if beat_index == 0 else None
+    if scene_type in ("quiz", "loop"):
+        return "pop" if beat.get("say") or beat.get("text") else None
     if scene_type in ("cards", "clues", "steps", "countdown", "cta"):
         return "pop"
     if scene_type == "pair" and beat.get("reveal"):
@@ -435,6 +441,7 @@ def render(spec_path, out_dir):
     for old in frames.glob("*.jpg"):
         old.unlink()
     gid = spec.get("game")
+    THEME["name"] = spec.get("theme")
     voice = spec.get("voice") or voice_for_week(spec["date"])
 
     # 1. Voice per beat, then the beat times inside each scene.
