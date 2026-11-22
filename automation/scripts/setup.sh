@@ -9,6 +9,10 @@ mkdir -p "$CACHE/fonts" "$CACHE/voices"
 if [ ! -f "$CACHE/fonts/node_modules/@fontsource/manjari/700.css" ]; then
   (cd "$CACHE/fonts" && npm init -y >/dev/null 2>&1 && npm install --silent @fontsource/baloo-chettan-2 @fontsource/manjari)
 fi
+# DM Serif Display: the English headline face of the "board" reel theme (board.py, 22 Nov 2026).
+if [ ! -f "$CACHE/fonts/node_modules/@fontsource/dm-serif-display/400.css" ]; then
+  (cd "$CACHE/fonts" && npm install --silent @fontsource/dm-serif-display@5)
+fi
 
 # Always install with "python3 -m pip": plain "pip" can belong to a different Python than "python3" (it did on
 # the cloud runner: pip was 3.13, python3 was 3.11), which left the scripts unable to import what was installed.

@@ -49,6 +49,9 @@ goes out. There are **only reels** now: no carousels or image posts.
 > The first B-rules look is `"theme": "studio"` (`scripts/studio.py`, 21 Nov 2026: night-teal TV quiz stage,
 > swaying spotlights, gold grid floor, the game's real screen large; scene types hook, quiz, reveal, loop).
 > Add new themes there or beside it rather than falling back to the old template.
+> Second B-rules look: `"theme": "board"` (`scripts/board.py`, 22 Nov 2026: editorial puzzle page, newsprint paper with a
+> drifting crossword grid, DM Serif Display headlines, yellow highlighter sweeps, huge flipping game tiles, deep green
+> slab bleeding off the bottom; scene types hook, board (tiles + ticking timer bar), reveal (tiles flip), loop).
 
 These are his three requirements, plus what made the approved sample work. Don't loosen them.
 
