@@ -150,18 +150,33 @@
     ],
     "rule": "Alternate by week: even ISO week number uses arjun, odd uses meera.",
     "download": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/{voice}.tar.bz2",
-    "provider": "piper",
-    "providerNote": "Abr, 24 Nov 2026: story reels are voiced with ElevenLabs (Malayalam, eleven_v3) once the ElevenLabs connector is attached and tested; switch this to \"eleven\" then. Piper (voices below) is the free fallback.",
+    "provider": "eleven",
+    "providerNote": "Abr, 24 Nov 2026: story reels are voiced with ElevenLabs (Malayalam, eleven_v3) through the ElevenLabs connector. Wired 24 Nov 2026 (automation/ELEVENLABS.md). Each run still falls back to Piper (voices below) by itself when voice_lines.py preflight fails, the connector is missing in the run, or credits are short.",
     "eleven": {
       "model": "eleven_v3",
       "languageCode": "ml",
       "monthlyCredits": 10000,
-      "cycleStartDay": 1,
+      "cycleStartDay": 24,
+      "cycleNote": "The free plan's credits reset on the 24th (next: 24 Dec 2026, 23:07 India time). Runs pass the real balance from account_get_usage to voice_lines.py plan --left.",
       "maxCharsPerReel": 450,
       "reserve": 300,
       "settings": {},
-      "cast": {},
-      "castNote": "One ElevenLabs voice id per story character (ammachi, uncle, appu, meenu, narrator), picked once; never audition voices with paid generations.",
+      "cast": {
+        "ammachi": "n4fEDQwxuAjplyp0aJy4",
+        "uncle": "jC5gBeWiOWA75lYTC3ux",
+        "appu": "yK5OyHRDkLof80lsqkUP",
+        "meenu": "YC7kIECPG5vM2RiP22Rd",
+        "narrator": "yK5OyHRDkLof80lsqkUP"
+      },
+      "castNames": {
+        "ammachi": "Solly Rajan Philips (older Malayali woman)",
+        "uncle": "Aby (middle-aged man, south Kollam Malayalam)",
+        "appu": "Ajay - Engaging Malayalam tone (young man, made for reels)",
+        "meenu": "Namitha - Young Malayalam Voice (young woman, bright, conversational)",
+        "narrator": "same voice as Appu, so the fixed playkeralam.com sign-off line is voiced once and reused in every reel"
+      },
+      "castNote": "Picked 24 Nov 2026 from the ElevenLabs voice library listing (free), no auditions. Library voices work on the free plan through the connector without using a voice slot. Changing a voice id makes every cached line of that character a new line (paid again).",
+      "downloadHost": "elevenlabsusercontent.com",
       "attribution": "Voice: ElevenLabs (elevenlabs.io)",
       "attributionNote": "ElevenLabs' free plan requires crediting ElevenLabs and does not allow commercial use; on a paid plan (Starter or above) set attribution to an empty string."
     }

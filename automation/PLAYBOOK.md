@@ -100,21 +100,34 @@ night). Vary the place and tint from reel to reel and record them in rotation.js
 New places go in `setting_svg()` in story.py.
 
 **Voice: ElevenLabs, voiced once (credits are scarce).** When `config.json` → `voice.provider` is `"eleven"`, the
-reel's lines are voiced with the ElevenLabs connector (Malayalam, model and per-character voice ids in
-`voice.eleven`). The free plan has 10,000 credits a month at 1 credit per character, about 20 reels, so:
-- Freeze the script before voicing (every line final, facts checked). `voice_lines.py plan spec.json` lists each
-  line, its voice and its cost and checks the budget: at most `maxCharsPerReel` (450) characters per reel, and
-  enough left in the cycle. Over budget: shorten lines. Not enough credits: render with `"voiceProvider": "piper"`.
-- Voice ONLY the lines `plan` marks VOICE, each exactly once, then `voice_lines.py put spec.json N FILE` straight
-  away. Lines already cached are free. Never re-voice a line to try a different read, never audition voices with
-  paid generations, never generate a test line "to check it works".
+reel's lines are voiced with the ElevenLabs connector (Malayalam, model `eleven_v3`, one fixed library voice per
+character in `voice.eleven.cast`: Ammachi, Kuttan uncle, Appu, Meenu; the narrator shares Appu's voice). The exact
+tool calls are in `automation/ELEVENLABS.md`. The free plan has 10,000 credits a month at 1 credit per character,
+about 20 reels, so:
+- First `voice_lines.py preflight` (free) and check the ElevenLabs tools are in the session. If either fails,
+  voice nothing: render with `"voiceProvider": "piper"` and say why.
+- Freeze the script before voicing (every line final, facts checked). `voice_lines.py plan spec.json --left N`
+  (N = credits left from the connector's `account_get_usage`) lists each line, its voice and its cost and checks
+  the budget: at most `maxCharsPerReel` (450) new credits per reel, and enough left in the cycle. Over budget:
+  shorten lines. Not enough credits: render with `"voiceProvider": "piper"`.
+- Voice ONLY the lines `plan` marks VOICE, each exactly once (`generations_count` 1), then
+  `voice_lines.py fetch spec.json N URL --flow F --gen G` straight away. Lines marked "cached" are free; lines marked
+  "PAID, fetch" were paid by an earlier run: fetch them with a fresh URL, never voice them again. Never re-voice a
+  line to try a different read, never audition voices with paid generations, never generate a test line "to check
+  it works".
+- Natural reads: write the lines the way a Kerala family actually talks (short, colloquial, English words people
+  really use written in Malayalam script, e.g. സിമ്പിൾ). A beat may add `"tone"`, one English audio tag such as
+  `excited`, `sarcastic`, `laughs`, `whispers`, `surprised`, `sighs`; ElevenLabs gets `[tone] line`. Use it on the
+  2-4 lines where the read carries the joke (the boast, the shock, the comeback); each tag costs its characters.
+- The url beat's line is always exactly "പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ." with `"speaker": "narrator"`
+  and no tone: it is voiced once and reused free in every reel.
 - Commit and push `automation/voice-cache/` and `automation/voice-usage.json` right after voicing, before rendering,
   so a failure later can't lose audio that was paid for.
 - The renderer only reads the cache. Re-render as often as needed: it costs nothing. If a voiced line has a real
   error (a wrong fact), re-voicing that one line is allowed once; say so in the summary.
 - How the connector's audio reaches this workspace is in `automation/ELEVENLABS.md`. If that path fails, don't
-  retry generations: render with Piper, keep the script, and report it.
-When `voice.provider` is `"piper"` (ElevenLabs not connected yet), use the Piper voices: female characters get
+  retry generations: the line is already logged as paid, so render with Piper, keep the script, and report it.
+When the run falls back to Piper (or `voice.provider` is `"piper"`), use the Piper voices: female characters get
 meera, male ones arjun. Piper is fast, so add silent reaction beats or a scene `min` to reach 30 s.
 
 **Self-check (instead of the B list):** the first frame shows the hook line; it is a story with characters, not a
@@ -227,9 +240,11 @@ In its own folder `automation/work/<today>/<folder>/`:
 3. **Spec**: write `spec.json` in beats, following the recipe for today's format (below), the scene types at
    the top of `render_reel.py`, and the shape of `automation/examples/thaaranira-cast-puzzle.json` (read it
    first, every run). Copy screenshots into this folder and refer to them by file name (`"shot": "shot.png"`).
-4. **Voice** (story reels, when `voice.provider` is `"eleven"`): `python3 automation/scripts/voice_lines.py plan spec.json`,
-   voice only the lines it marks VOICE (each once) with the ElevenLabs connector, `put` each file, then commit and push
-   `automation/voice-cache/` and `automation/voice-usage.json` before rendering. See *Story reels* above.
+4. **Voice** (story reels, when `voice.provider` is `"eleven"`): `python3 automation/scripts/voice_lines.py preflight`,
+   then `plan spec.json --left N`, voice only the lines it marks VOICE (each once, `generations_count` 1) with the
+   ElevenLabs connector, `fetch` each one (and any "PAID, fetch" line), then commit and push `automation/voice-cache/`
+   and `automation/voice-usage.json` before rendering. Step by step: `automation/ELEVENLABS.md`. If preflight fails,
+   the tools are missing, credits are short or a download fails, render with `"voiceProvider": "piper"` instead.
 5. **Render**: `python3 automation/scripts/render_reel.py spec.json out` (2-4 minutes for a 30-45 s story).
 6. **Look at it.** Read `out/contact-sheet.jpg` (a frame after every beat) and `out/cover.jpg` (the end of the
    hook) as images. Check:

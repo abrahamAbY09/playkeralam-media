@@ -52,8 +52,18 @@ def eleven_voice(speaker):
     return vid
 
 
+def eleven_prompt(text, tone=None):
+    """What is sent to ElevenLabs for one beat: the Malayalam line, led by an optional English audio tag
+    (beat field "tone", e.g. "excited" -> "[excited] ..."). eleven_v3 performs the tag instead of reading it out;
+    Piper never sees it. Tags cost credits like any other characters, so use them only where the read needs it."""
+    text = str(text or "").strip()
+    tone = str(tone or "").strip().strip("[]").strip()
+    return f"[{tone}] {text}" if tone else text
+
+
 def line_key(text, voice_id, model=None, settings=None):
-    """Cache key for one ElevenLabs line: the same text, voice, model and settings are never voiced twice."""
+    """Cache key for one ElevenLabs line: the same prompt (tag + text), voice, model and settings are never voiced
+    twice."""
     cfg = eleven_cfg()
     model = model or cfg.get("model", "eleven_v3")
     settings = settings if settings is not None else cfg.get("settings", {})
@@ -61,8 +71,8 @@ def line_key(text, voice_id, model=None, settings=None):
     return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:20]
 
 
-def line_file(text, speaker):
-    return VOICE_CACHE / f"{line_key(text, eleven_voice(speaker))}.mp3"
+def line_file(text, speaker, tone=None):
+    return VOICE_CACHE / f"{line_key(eleven_prompt(text, tone), eleven_voice(speaker))}.mp3"
 
 
 def _decode(path, sr=44100):
@@ -81,11 +91,11 @@ def _decode(path, sr=44100):
     return np.clip(y, -1, 1), sr
 
 
-def speak_line(text, speaker=None, provider="piper", date=None, voice=None):
+def speak_line(text, speaker=None, provider="piper", date=None, voice=None, tone=None):
     """One beat's voice as float32 mono samples. ElevenLabs lines come only from the cache (never the network);
     Piper picks a voice by character (female cast -> meera, male -> arjun), else the voice of the week."""
     if provider == "eleven":
-        f = line_file(text, speaker)
+        f = line_file(text, speaker, tone)
         if not f.exists():
             raise FileNotFoundError(str(f))
         return _decode(f)

@@ -1,5 +1,5 @@
 {
- "_about": "THE MODEL STORY REEL (24 Nov 2026): Thaaranira No. 62, 30 s. Uncle boasts, Appu tests him on the real game, Uncle flunks clue 1, the viewer gets a 3 s thinking window, Ammachi answers without looking up, Uncle's excuse, then the playkeralam.com sign, one share trigger and the echo of the hook. Copy the mechanics (speakers, cams, moods, phone scenes, timer, answer plate, loop), never the plot. shot.png comes from shoot.py; crop/chipTop suit the Thaaranira page.",
+ "_about": "THE MODEL STORY REEL (24 Nov 2026): Thaaranira No. 62, 30 s. Uncle boasts, Appu tests him on the real game, Uncle flunks clue 1, the viewer gets a 3 s thinking window, Ammachi answers without looking up, Uncle's excuse, then the playkeralam.com sign, one share trigger and the echo of the hook. Copy the mechanics (speakers, cams, moods, phone scenes, timer, answer plate, loop), never the plot. shot.png comes from shoot.py; crop/chipTop suit the Thaaranira page. Voice (ElevenLabs): \"tone\" tags only on the lines whose read carries the joke; the url line is the shared narrator sign-off.",
  "game": "thaaranira",
  "date": "2026-11-25",
  "theme": "story",
@@ -32,7 +32,8 @@
      "say": "എനിക്കറിയാത്ത ഒരു മലയാളം സിനിമയുമില്ല!",
      "speaker": "uncle",
      "text": "I know EVERY Malayalam film!",
-     "style": "big"
+     "style": "big",
+     "tone": "confident"
     },
     {
      "say": "എന്നാ ഇതൊന്ന് പറ, അങ്കിളേ.",
@@ -116,7 +117,8 @@
      },
      "fx": "sweat",
      "on": "uncle",
-     "sfx": "boom"
+     "sfx": "boom",
+     "tone": "laughs"
     },
     {
      "dur": 0.9
@@ -201,7 +203,8 @@
      "cam": "ammachi",
      "mood": {
       "ammachi": "proud"
-     }
+     },
+     "tone": "calmly"
     },
     {
      "say": "രണ്ടായിരത്തി പത്ത്. സത്യൻ അന്തിക്കാട്.",
@@ -268,7 +271,7 @@
     },
     {
      "say": "പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ.",
-     "speaker": "appu",
+     "speaker": "narrator",
      "text": "playkeralam.com",
      "url": true
     },

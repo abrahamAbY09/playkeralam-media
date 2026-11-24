@@ -1,0 +1,20 @@
+{
+ "_about": "Every ElevenLabs line voiced for a reel (1 credit per character). Written by voice_lines.py: status 'pending' = paid but not downloaded yet (fetch it, never voice it again); 'stored' = in voice-cache/eleven.",
+ "entries": [
+  {
+   "date": "2026-11-24",
+   "reelDate": "every reel",
+   "folder": "",
+   "speaker": "narrator",
+   "voiceId": "yK5OyHRDkLof80lsqkUP",
+   "model": "eleven_v3",
+   "chars": 38,
+   "key": "a092dea71bfaa2d461b9",
+   "prompt": "പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ.",
+   "status": "pending",
+   "flow": "Sb26gIaZApkvsXYePjNo",
+   "gen": "Af4cK7n78yVIy9wiY364",
+   "note": "The fixed playkeralam.com sign-off line (url beat). Voiced 24 Nov 2026 as the connector test; fetch it once the environment allows elevenlabsusercontent.com, then every reel reuses it free."
+  }
+ ]
+}

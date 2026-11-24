@@ -15,7 +15,9 @@ Spec:
 }
 
 A scene is a list of BEATS. A beat is one short voice line ("say", Malayalam script only, 2-8 words) or a
-silent hit ("dur": seconds). Each beat may name a sound ("sfx": pop | tick | whoosh | ding | boom | null);
+silent hit ("dur": seconds). An ElevenLabs line may carry "tone": one English audio-tag word or two ("excited",
+"sarcastic", "laughs", "whispers"); it is sent as "[tone] say" (voice.eleven_prompt), costs credits like any
+character, and Piper ignores it. Each beat may name a sound ("sfx": pop | tick | whoosh | ding | boom | null);
 sensible defaults are added per scene type. Items appear the moment their beat starts, and the scene cuts as
 soon as its last beat ends plus a short tail ("tail", default 0.38 s). "min" sets a minimum scene length
 (use it for scenes people must read, such as a story).
@@ -469,7 +471,7 @@ def render(spec_path, out_dir):
         for b in s["beats"]:
             if b.get("say") and provider == "eleven":
                 try:
-                    speak_line(clean(b["say"]), b.get("speaker"), provider)
+                    speak_line(clean(b["say"]), b.get("speaker"), provider, tone=b.get("tone"))
                 except FileNotFoundError as e:
                     missing.append(f"{b.get('speaker') or 'narrator'}: {b['say']}  ->  {e}")
     if missing:
@@ -482,7 +484,8 @@ def render(spec_path, out_dir):
         for b in s["beats"]:
             if b.get("say"):
                 a, sr = speak_line(clean(b["say"]), b.get("speaker"), provider, spec["date"],
-                                   spec.get("voice") if provider != "eleven" and not b.get("speaker") else None)
+                                   spec.get("voice") if provider != "eleven" and not b.get("speaker") else None,
+                                   tone=b.get("tone"))
                 a = resample(a, sr, SR)
                 length = len(a) / SR
             else:
