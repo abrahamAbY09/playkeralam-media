@@ -149,7 +149,22 @@
       "vits-piper-ml_IN-meera-medium"
     ],
     "rule": "Alternate by week: even ISO week number uses arjun, odd uses meera.",
-    "download": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/{voice}.tar.bz2"
+    "download": "https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/{voice}.tar.bz2",
+    "provider": "piper",
+    "providerNote": "Abr, 24 Nov 2026: story reels are voiced with ElevenLabs (Malayalam, eleven_v3) once the ElevenLabs connector is attached and tested; switch this to \"eleven\" then. Piper (voices below) is the free fallback.",
+    "eleven": {
+      "model": "eleven_v3",
+      "languageCode": "ml",
+      "monthlyCredits": 10000,
+      "cycleStartDay": 1,
+      "maxCharsPerReel": 450,
+      "reserve": 300,
+      "settings": {},
+      "cast": {},
+      "castNote": "One ElevenLabs voice id per story character (ammachi, uncle, appu, meenu, narrator), picked once; never audition voices with paid generations.",
+      "attribution": "Voice: ElevenLabs (elevenlabs.io)",
+      "attributionNote": "ElevenLabs' free plan requires crediting ElevenLabs and does not allow commercial use; on a paid plan (Starter or above) set attribution to an empty string."
+    }
   },
   "captions": {
     "maxHashtags": 5,
@@ -169,8 +184,8 @@
     "linkLine": "ലിങ്ക് ബയോയിൽ · Link in bio · playkeralam.com"
   },
   "reels": {
-    "minSeconds": 13,
-    "maxSeconds": 17,
+    "minSeconds": 30,
+    "maxSeconds": 45,
     "width": 1080,
     "height": 1920,
     "fps": 30

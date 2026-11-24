@@ -62,7 +62,8 @@ import sound  # noqa: E402
 import studio  # noqa: E402
 import board  # noqa: E402
 import race  # noqa: E402
-from voice import speak, voice_for_week  # noqa: E402
+import story  # noqa: E402
+from voice import provider_for, speak_line, voice_for_week  # noqa: E402
 
 W, H, FPS, SR = CONFIG["reels"]["width"], CONFIG["reels"]["height"], CONFIG["reels"]["fps"], 44100
 GAP = 0.14        # silence between two voice beats in a scene
@@ -71,7 +72,7 @@ TAIL = 0.38       # after the last beat, before the cut
 ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "psc", "aadyam", "ashwamedham",
              "antakshari", "kerala-guesser", "thurupp", "cidmoosa", "sat"]
 WARN = []
-THEME = {"name": None}   # set from spec["theme"]; "studio" (studio.py), "board" (board.py), "race" (race.py) are the B-rules looks
+THEME = {"name": None}   # set from spec["theme"]; "studio", "board", "race" (B-rules looks); "story" (story.py, 25 Nov 2026: 30-45 s story reels)
 
 
 def clean(text):
@@ -347,6 +348,8 @@ def scene_html(s, i, gid, ts, dur, start, total, spec_dir):
         return board.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
     if THEME["name"] == "race":
         return race.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
+    if THEME["name"] == "story":
+        return story.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
     accent = game(gid)["color"] if gid else BLUE
     t = s["type"]
     look = LOOKS.get(t, "pale" if i % 2 else "soft")
@@ -394,6 +397,14 @@ def scene_html(s, i, gid, ts, dur, start, total, spec_dir):
 def default_sfx(scene_type, scene_index, beat_index, beat):
     if "sfx" in beat:
         return beat["sfx"]
+    if THEME["name"] == "story":
+        if beat.get("answer"):
+            return "ding"
+        if scene_index == 0 and beat_index == 0:
+            return "boom"
+        if beat.get("url") or beat.get("echo") or beat.get("chip") or beat.get("style") in ("big", "tag"):
+            return "pop"
+        return None
     if "num" in beat:
         return "tick"
     if scene_type in ("hook", "text"):
@@ -449,25 +460,41 @@ def render(spec_path, out_dir):
     gid = spec.get("game")
     THEME["name"] = spec.get("theme")
     voice = spec.get("voice") or voice_for_week(spec["date"])
+    provider = provider_for(spec)
 
-    # 1. Voice per beat, then the beat times inside each scene.
+    # 1. Voice per beat, then the beat times inside each scene. ElevenLabs lines come only from the committed
+    #    voice cache (voice_lines.py); a missing line stops the render instead of spending credits again.
+    missing = []
+    for s in spec["scenes"]:
+        for b in s["beats"]:
+            if b.get("say") and provider == "eleven":
+                try:
+                    speak_line(clean(b["say"]), b.get("speaker"), provider)
+                except FileNotFoundError as e:
+                    missing.append(f"{b.get('speaker') or 'narrator'}: {b['say']}  ->  {e}")
+    if missing:
+        raise SystemExit("These lines are not voiced yet (run voice_lines.py plan, voice each ONCE, then voice_lines.py put):\n  "
+                         + "\n  ".join(missing))
     plan = []
     for si, s in enumerate(spec["scenes"]):
         t = 0.0 if si == 0 else LEAD
-        ts, auds = [], []
+        ts, auds, lens = [], [], []
         for b in s["beats"]:
             if b.get("say"):
-                a, sr = speak(clean(b["say"]), voice)
+                a, sr = speak_line(clean(b["say"]), b.get("speaker"), provider, spec["date"],
+                                   spec.get("voice") if provider != "eleven" and not b.get("speaker") else None)
                 a = resample(a, sr, SR)
                 length = len(a) / SR
             else:
                 a, length = np.zeros(0, np.float32), float(b.get("dur", 0.55))
             ts.append(t)
             auds.append(a)
-            t += length + (float(b.get("gap", GAP)) if b.get("say") else 0)
+            lens.append(length if b.get("say") else 0.0)
+            t += length + (float(b.get("gap", spec.get("gap", GAP))) if b.get("say") else 0)
         if s["beats"][-1].get("say"):
-            t -= float(s["beats"][-1].get("gap", GAP))
+            t -= float(s["beats"][-1].get("gap", spec.get("gap", GAP)))
         dur = max(float(s.get("min", 0)), t + float(s.get("tail", 0.05 if s["type"] == "countdown" else TAIL)))
+        s["_lens"] = lens
         plan.append((ts, auds, dur))
     durs = [p[2] for p in plan]
     total = sum(durs)
@@ -560,7 +587,9 @@ def render(spec_path, out_dir):
         img.paste(Image.open(fp).resize((270, 480)), ((j % cols) * 278, (j // cols) * 488))
     img.save(out / "contact-sheet.jpg", quality=88)
     words = sum(len(b["say"].split()) for s in spec["scenes"] for b in s["beats"] if b.get("say"))
-    info = {"file": str(mp4), "seconds": round(total, 2), "coverMs": cover_ms, "voice": voice, "words": words,
+    chars = sum(len(clean(b["say"]).strip()) for s in spec["scenes"] for b in s["beats"] if b.get("say"))
+    info = {"file": str(mp4), "seconds": round(total, 2), "coverMs": cover_ms, "voice": voice if provider != "eleven" else "eleven",
+            "provider": provider, "sayChars": chars, "words": words,
             "scenes": [round(x, 2) for x in durs], "frames": k}
     (out / "reel.json").write_text(json.dumps(info, indent=1), encoding="utf-8")
     for w in WARN:

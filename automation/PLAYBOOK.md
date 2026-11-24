@@ -31,12 +31,98 @@ goes out. There are **only reels** now: no carousels or image posts.
 - **5 hashtags at most** (an Instagram limit), always including #PlayKeralam.
 - **One reel per posting day, at 9:00 pm today.** The Metricool free plan publishes at most 20 posts a
   calendar month; the posting calendar is built to stay within it, and `plan_week.py` checks it too.
-- **Every reel follows the approved style** in *Reel style* below (Abr signed it off on 23 Oct 2026):
-  hook first, fast, items synced to the voice, proper conjuncts. The model is
-  `automation/examples/thaaranira-cast-puzzle.json`; copy its shape.
+- **Every reel is a 30-45 s animated story** (Abr, 24 Nov 2026): see *Story reels* below, which overrides the older
+  *Reel style*. Hook on frame 0, items synced to the voice, proper conjuncts. The model is
+  `automation/examples/story-thaaranira.json`.
 - **Fully automatic**: `autoPublish: true`, `draft: false`. Don't wait for anyone.
 
-## Reel style (approved by Abr, 23 Oct 2026)
+## Story reels (Abr, 24 Nov 2026) — this section wins over everything below it
+
+Abr: 15 seconds was too cramped, and reels that explain features don't get reach. From 25 Nov 2026 every reel is a
+**30-45 second animated story**: a tiny plot with characters, not a feature explainer. It still opens with a hook on
+frame 0, still shows the real game, and still ends on playkeralam.com plus one specific share trigger. Where this
+section disagrees with the B rules in the scheduled task, the older "Reel style" text, the recipes table or the
+example spec, **this section wins**. Abr's standing rules still hold: Malayalam voice, English on screen (a puzzle's
+own Malayalam words excepted), proper conjuncts, true facts, no spoilers.
+
+**The look: `"theme": "story"`** (`scripts/story.py`). Flat, warm illustration; a recurring cast in a real Kerala
+place; speech bubbles in English for their Malayalam lines; camera moves and reaction effects; the game's real screen
+held up large on a phone. Read the docstring at the top of story.py every run for scene types and fields. The model is
+`automation/examples/story-thaaranira.json` (a 30 s Thaaranira story); copy its mechanics, not its plot.
+
+**The cast** (recurring, so viewers get to know them; voices are fixed per character):
+- **Ammachi**: grandmother, kasavu set-mundu, glasses. Calm, sharp, quietly wins.
+- **Kuttan uncle**: moustache, shirt and mundu. Over-confident know-it-all who gets humbled.
+- **Appu** (about 20): curly hair, mustard hoodie, always on his phone; brings in the game.
+- **Meenu** (about 20): braid with jasmine, pink churidar; competitive and sarcastic.
+Use 2-3 of them per reel. Never mock anyone's age, looks, caste, religion or gender; the joke is the situation.
+
+**Shape (30-45 s, 5-7 scenes):**
+1. **Hook, 0-2 s (scene type `hook`).** The first frame is already mid-conflict with one huge line (style `big`): a
+   boast, a dare, a relatable pain ("I know EVERY Malayalam film!", "Nobody gets this word in 3 tries", "Who said this
+   film came first?"). No title card, no greeting.
+2. **Set-up and challenge (shot + phone).** A character brings out the game; the phone scene shows the real screen
+   large, with the puzzle's real content (clue rows, tiles, the two films) appearing beat by beat.
+3. **Escalation.** Someone guesses wrong or gets stuck; a reaction (shock, sweat, the camera pushing in). Then a
+   2-3 s **thinking window for the viewer** on the phone (a `timer` ring and silent `tick` beats) with an English
+   line that turns it to them ("Can YOU get it first?").
+4. **Payoff with a twist.** The answer lands as an `answer` plate (true facts only), ideally from the least expected
+   character, plus one funny reaction or excuse.
+5. **Loop and share (type `loop`).** The playkeralam.com sign drops in (a `url` beat; its voice line is
+   "പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ."), then ONE specific share trigger aimed at a real person
+   ("Tag your film-expert uncle!"), then an `echo` beat bringing back the hook line so a replay flows on.
+
+**Text and voice per beat:** one Malayalam line (2-8 words, natural spoken Malayalam, the way a family talks), the
+English bubble saying the same in at most 6 words. Every beat names its `speaker` (ammachi, uncle, appu, meenu, or
+narrator for a caption box). Silent reaction beats (`"dur"`) are good: comedy needs a beat of air, and they cost no
+voice credits. Use `"gap": 0.28` at the top of the spec for natural turn-taking.
+
+**Story premises** (starting points; write a fresh plot each time, built only on facts.json and games.json):
+| Game | Premise |
+| --- | --- |
+| thaaranira | Uncle boasts he knows every film; Appu reads cast clues; Uncle guesses wrong; Ammachi gets it without looking up. |
+| vaakku | Meenu is on her last try with the family crowding the phone; Ammachi's proverb gives the word; tiles flip green. |
+| paryayam | Appu and Meenu race to find five synonyms; Uncle's "big word" turns out to be a bonus word. |
+| katha | Meenu reads the one-line story aloud on a bus; everyone shouts different films; the twist is who got it. |
+| aadyam | Two uncles at the tea shop bet a glass of tea on which film came first; Appu settles it; the gap is the surprise. |
+| ashwamedham | Uncle picks the most obscure film he knows to beat it; it names the film anyway; Uncle demands a rematch. |
+| antakshari | Family Antakshari on a night terrace, stuck on a hard letter; Appu's helper saves the team. |
+| kerala-guesser | A cousin back from the Gulf insists a place is near the wrong town; the map shows how far off he was. |
+| thurupp | Three uncles at the tea shop need a fourth for 28; Appu opens a room, bots fill the seats. |
+| cidmoosa | Appu narrates a chase like a commentator while Meenu plays; chilli powder saves the day. |
+| sat | Uncle still hides behind the same pillar he used as a kid; the 3D tharavad, nadumuttam and well. |
+| psc | Meenu's exam prep: Ammachi quizzes her at breakfast; one explanation surprises even Uncle. |
+| general | One relatable family moment (forgotten streak, a weekend challenge, four games before the tea gets cold). |
+
+**Places** (`setting`): living-room, tea-shop, bus-stop, night-terrace, with an optional `tint` (morning, evening,
+night). Vary the place and tint from reel to reel and record them in rotation.json's `look`
+(`{"theme": "story", "setting": ..., "tint": ..., "cast": [...]}`); the last 3 reels must not all share a place.
+New places go in `setting_svg()` in story.py.
+
+**Voice: ElevenLabs, voiced once (credits are scarce).** When `config.json` → `voice.provider` is `"eleven"`, the
+reel's lines are voiced with the ElevenLabs connector (Malayalam, model and per-character voice ids in
+`voice.eleven`). The free plan has 10,000 credits a month at 1 credit per character, about 20 reels, so:
+- Freeze the script before voicing (every line final, facts checked). `voice_lines.py plan spec.json` lists each
+  line, its voice and its cost and checks the budget: at most `maxCharsPerReel` (450) characters per reel, and
+  enough left in the cycle. Over budget: shorten lines. Not enough credits: render with `"voiceProvider": "piper"`.
+- Voice ONLY the lines `plan` marks VOICE, each exactly once, then `voice_lines.py put spec.json N FILE` straight
+  away. Lines already cached are free. Never re-voice a line to try a different read, never audition voices with
+  paid generations, never generate a test line "to check it works".
+- Commit and push `automation/voice-cache/` and `automation/voice-usage.json` right after voicing, before rendering,
+  so a failure later can't lose audio that was paid for.
+- The renderer only reads the cache. Re-render as often as needed: it costs nothing. If a voiced line has a real
+  error (a wrong fact), re-voicing that one line is allowed once; say so in the summary.
+- How the connector's audio reaches this workspace is in `automation/ELEVENLABS.md`. If that path fails, don't
+  retry generations: render with Piper, keep the script, and report it.
+When `voice.provider` is `"piper"` (ElevenLabs not connected yet), use the Piper voices: female characters get
+meera, male ones arjun. Piper is fast, so add silent reaction beats or a scene `min` to reach 30 s.
+
+**Self-check (instead of the B list):** the first frame shows the hook line; it is a story with characters, not a
+feature list; every bubble is English, at most 6 words, and lands with its line; the real game screen appears large;
+facts match facts.json, no spoiler; the answer plate never covers a face that is reacting; text inside the safe zone;
+playkeralam.com sign plus one specific share trigger, then the echo; 30-45 s; conjuncts joined where Malayalam shows.
+
+## Reel style (approved by Abr, 23 Oct 2026; for story reels see the section above)
 
 > **20 Nov 2026: the scroll-stopping "B" rules in the scheduled task's prompt now override this section,
 > the recipes table and `examples/thaaranira-cast-puzzle.json` wherever they conflict.** In short: four
@@ -141,8 +227,11 @@ In its own folder `automation/work/<today>/<folder>/`:
 3. **Spec**: write `spec.json` in beats, following the recipe for today's format (below), the scene types at
    the top of `render_reel.py`, and the shape of `automation/examples/thaaranira-cast-puzzle.json` (read it
    first, every run). Copy screenshots into this folder and refer to them by file name (`"shot": "shot.png"`).
-4. **Render**: `python3 automation/scripts/render_reel.py spec.json out` (about a minute).
-5. **Look at it.** Read `out/contact-sheet.jpg` (a frame after every beat) and `out/cover.jpg` (the end of the
+4. **Voice** (story reels, when `voice.provider` is `"eleven"`): `python3 automation/scripts/voice_lines.py plan spec.json`,
+   voice only the lines it marks VOICE (each once) with the ElevenLabs connector, `put` each file, then commit and push
+   `automation/voice-cache/` and `automation/voice-usage.json` before rendering. See *Story reels* above.
+5. **Render**: `python3 automation/scripts/render_reel.py spec.json out` (2-4 minutes for a 30-45 s story).
+6. **Look at it.** Read `out/contact-sheet.jpg` (a frame after every beat) and `out/cover.jpg` (the end of the
    hook) as images. Check:
    - the hook is the first thing on screen and reads as a question or challenge;
    - **all on-screen text is English**, apart from a puzzle's own Malayalam words (which carry their English
@@ -152,10 +241,10 @@ In its own folder `automation/work/<today>/<folder>/`:
    - nothing overlaps or is cut off, every item appears with its line, the facts match facts.json, no
      spoiler, the brand is right.
    Every renderer `WARNING` must be fixed (it flags Latin letters or digits in a voice line, long voice
-   lines, content outside the safe area, a first scene that isn't a hook, and a length outside 12-22 s).
-   Re-render until it is clean.
-6. **Caption**: write `out/caption.txt` (see *Captions*).
-7. **Check**: `python3 automation/scripts/check.py out` must pass.
+   lines, content outside the safe area, a first scene that isn't a hook, and a length outside 30-45 s).
+   Re-render until it is clean (re-renders never re-voice anything).
+7. **Caption**: write `out/caption.txt` (see *Captions*).
+8. **Check**: `python3 automation/scripts/check.py out` must pass.
 
 ### Recipes (reels: 5-7 scenes, 12-22 seconds, hook first)
 
@@ -215,6 +304,7 @@ A general item has `"game": null` in the spec.
 
 <English, 1-2 short lines saying the same>
 <A question to comment on> and <a "send this to ..." line>
+<when the voice is ElevenLabs on the free plan: the line in config.json voice.eleven.attribution>
 
 ലിങ്ക് ബയോയിൽ · Link in bio · playkeralam.com
 

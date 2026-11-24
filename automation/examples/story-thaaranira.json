@@ -1,0 +1,289 @@
+{
+ "_about": "THE MODEL STORY REEL (24 Nov 2026): Thaaranira No. 62, 30 s. Uncle boasts, Appu tests him on the real game, Uncle flunks clue 1, the viewer gets a 3 s thinking window, Ammachi answers without looking up, Uncle's excuse, then the playkeralam.com sign, one share trigger and the echo of the hook. Copy the mechanics (speakers, cams, moods, phone scenes, timer, answer plate, loop), never the plot. shot.png comes from shoot.py; crop/chipTop suit the Thaaranira page.",
+ "game": "thaaranira",
+ "date": "2026-11-25",
+ "theme": "story",
+ "voice": null,
+ "bpm": 100,
+ "scenes": [
+  {
+   "type": "hook",
+   "setting": "living-room",
+   "tint": "evening",
+   "cast": [
+    {
+     "id": "uncle",
+     "pose": "cross",
+     "mood": "smug"
+    },
+    {
+     "id": "ammachi",
+     "pose": "paper",
+     "mood": "normal"
+    },
+    {
+     "id": "appu",
+     "pose": "phone",
+     "mood": "normal"
+    }
+   ],
+   "beats": [
+    {
+     "say": "എനിക്കറിയാത്ത ഒരു മലയാളം സിനിമയുമില്ല!",
+     "speaker": "uncle",
+     "text": "I know EVERY Malayalam film!",
+     "style": "big"
+    },
+    {
+     "say": "എന്നാ ഇതൊന്ന് പറ, അങ്കിളേ.",
+     "speaker": "appu",
+     "text": "Okay. Name this one, Uncle.",
+     "cam": "appu",
+     "mood": {
+      "appu": "smug"
+     }
+    },
+    {
+     "say": "ഒറ്റ സൂചന മതി!",
+     "speaker": "uncle",
+     "text": "One clue is enough!",
+     "cam": "uncle",
+     "pose": {
+      "uncle": "point"
+     }
+    }
+   ],
+   "min": 5.2
+  },
+  {
+   "type": "phone",
+   "setting": "living-room",
+   "shot": "shot.png",
+   "crop": [
+    0,
+    200,
+    780,
+    1488
+   ],
+   "chipStyle": "game",
+   "chipTop": 324,
+   "chipStart": 2,
+   "beats": [
+    {
+     "say": "ആദ്യ സൂചന... ജയറാം.",
+     "speaker": "appu",
+     "text": "Clue 1: Jayaram",
+     "style": "caption"
+    }
+   ],
+   "min": 2.2
+  },
+  {
+   "type": "shot",
+   "setting": "living-room",
+   "tint": "evening",
+   "cast": [
+    {
+     "id": "uncle",
+     "pose": "point",
+     "mood": "smug"
+    },
+    {
+     "id": "ammachi",
+     "pose": "paper"
+    },
+    {
+     "id": "appu",
+     "pose": "phone"
+    }
+   ],
+   "beats": [
+    {
+     "say": "ജയറാമോ? സിമ്പിൾ! പഞ്ചവർണ്ണതത്ത!",
+     "speaker": "uncle",
+     "text": "Easy! Panchavarnathatha!",
+     "cam": "uncle"
+    },
+    {
+     "say": "തെറ്റി!",
+     "speaker": "appu",
+     "text": "WRONG!",
+     "style": "big",
+     "cam": "wide",
+     "mood": {
+      "uncle": "shock",
+      "appu": "laugh"
+     },
+     "fx": "sweat",
+     "on": "uncle",
+     "sfx": "boom"
+    },
+    {
+     "dur": 0.9
+    }
+   ]
+  },
+  {
+   "type": "phone",
+   "setting": "living-room",
+   "shot": "shot.png",
+   "crop": [
+    0,
+    200,
+    780,
+    1488
+   ],
+   "chipStyle": "game",
+   "chipTop": 324,
+   "chipStart": 2,
+   "beats": [
+    {
+     "say": "രണ്ടാം സൂചന, മംമ്ത മോഹൻദാസ്.",
+     "speaker": "appu",
+     "text": "Clue 2",
+     "chip": "Mamta Mohandas"
+    },
+    {
+     "say": "മൂന്ന്, അനിഖ സുരേന്ദ്രൻ.",
+     "speaker": "appu",
+     "text": "Clue 3",
+     "chip": "Anikha Surendran"
+    },
+    {
+     "text": "Can YOU get it first?",
+     "style": "caption",
+     "timer": 3,
+     "dur": 1.0,
+     "sfx": "tick"
+    },
+    {
+     "dur": 1.0,
+     "sfx": "tick"
+    },
+    {
+     "dur": 1.0,
+     "sfx": "tick"
+    }
+   ]
+  },
+  {
+   "type": "shot",
+   "setting": "living-room",
+   "tint": "evening",
+   "cast": [
+    {
+     "id": "uncle",
+     "pose": "head",
+     "mood": "think"
+    },
+    {
+     "id": "ammachi",
+     "pose": "paper"
+    },
+    {
+     "id": "appu",
+     "pose": "phone",
+     "mood": "smug"
+    }
+   ],
+   "beats": [
+    {
+     "say": "ശ്ശൊ... നാക്കിന്റെ തുമ്പത്തുണ്ട്!",
+     "speaker": "uncle",
+     "text": "Wait... it's on my tongue!",
+     "cam": "uncle",
+     "fx": "qmarks"
+    },
+    {
+     "say": "കഥ തുടരുന്നു.",
+     "speaker": "ammachi",
+     "text": "Kadha Thudarunnu.",
+     "cam": "ammachi",
+     "mood": {
+      "ammachi": "proud"
+     }
+    },
+    {
+     "say": "രണ്ടായിരത്തി പത്ത്. സത്യൻ അന്തിക്കാട്.",
+     "speaker": "ammachi",
+     "cam": "wide",
+     "answer": {
+      "kicker": "ANSWER",
+      "title": "Kadha Thudarunnu",
+      "sub": "2010 · Sathyan Anthikad"
+     },
+     "mood": {
+      "uncle": "shock",
+      "appu": "laugh"
+     },
+     "pose": {
+      "uncle": "down"
+     },
+     "fx": "lines",
+     "on": "uncle"
+    },
+    {
+     "dur": 1.2
+    },
+    {
+     "say": "അത്... ഞാൻ അമ്മച്ചിയെ ടെസ്റ്റ് ചെയ്തതാ!",
+     "speaker": "uncle",
+     "text": "I was just testing Ammachi!",
+     "cam": "uncle",
+     "mood": {
+      "uncle": "sad"
+     },
+     "fx": "sweat"
+    }
+   ]
+  },
+  {
+   "type": "loop",
+   "setting": "living-room",
+   "tint": "evening",
+   "cast": [
+    {
+     "id": "uncle",
+     "pose": "down",
+     "mood": "sad"
+    },
+    {
+     "id": "ammachi",
+     "pose": "wave",
+     "mood": "laugh"
+    },
+    {
+     "id": "appu",
+     "pose": "fist",
+     "mood": "laugh"
+    }
+   ],
+   "beats": [
+    {
+     "say": "അമ്മച്ചിയോടാ കളി!",
+     "speaker": "appu",
+     "text": "Never challenge Ammachi!",
+     "fx": "spark",
+     "on": "ammachi"
+    },
+    {
+     "say": "പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ.",
+     "speaker": "appu",
+     "text": "playkeralam.com",
+     "url": true
+    },
+    {
+     "say": "സിനിമാ അങ്കിളിനെ ടാഗ് ചെയ്യൂ!",
+     "speaker": "appu",
+     "text": "Tag your film-expert uncle!",
+     "style": "tag"
+    },
+    {
+     "echo": "I know EVERY Malayalam film!",
+     "dur": 1.5
+    }
+   ]
+  }
+ ],
+ "gap": 0.28
+}

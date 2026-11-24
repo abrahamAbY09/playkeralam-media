@@ -1,4 +1,12 @@
-"""Malayalam voice-over with the Piper voices (Arjun, Meera) through sherpa-onnx, fully offline.
+"""Malayalam voice-over: ElevenLabs lines from the committed voice cache, or the offline Piper voices.
+
+ElevenLabs (from 25 Nov 2026, Abr): the reel's lines are voiced ONCE through the ElevenLabs connector and the
+audio is saved in automation/voice-cache/eleven/ (committed), named by a hash of model + voice + settings + text.
+The renderer only ever reads that cache; it never calls ElevenLabs, so re-rendering a reel costs no credits. A
+line that is not in the cache stops the render (see voice_lines.py: plan, put, usage). Piper stays as the free
+fallback when ElevenLabs is not connected or the month's credits are short.
+
+Piper (Arjun, Meera) through sherpa-onnx, fully offline:
 
     from voice import speak
     samples, sample_rate = speak("ഇന്നത്തെ വാക്ക്...", voice="meera")
@@ -13,6 +21,8 @@ renderer can place lines back to back with no dead air. Don't change MODEL_SPEED
 """
 import datetime as dt
 import functools
+import hashlib
+import json
 import pathlib
 import subprocess
 import sys
@@ -20,7 +30,67 @@ import sys
 import numpy as np
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
-from common import CACHE  # noqa: E402
+from common import AUTOMATION, CACHE, CONFIG  # noqa: E402
+
+VOICE_CACHE = AUTOMATION / "voice-cache" / "eleven"
+PIPER_CAST = {"ammachi": "meera", "meenu": "meera", "uncle": "arjun", "appu": "arjun"}
+
+
+def eleven_cfg():
+    return CONFIG["voice"].get("eleven", {})
+
+
+def provider_for(spec):
+    return spec.get("voiceProvider") or CONFIG["voice"].get("provider", "piper")
+
+
+def eleven_voice(speaker):
+    cast = eleven_cfg().get("cast", {})
+    vid = cast.get(speaker or "narrator") or cast.get("narrator")
+    if not vid:
+        raise SystemExit(f"No ElevenLabs voice set for '{speaker}' in config.json voice.eleven.cast")
+    return vid
+
+
+def line_key(text, voice_id, model=None, settings=None):
+    """Cache key for one ElevenLabs line: the same text, voice, model and settings are never voiced twice."""
+    cfg = eleven_cfg()
+    model = model or cfg.get("model", "eleven_v3")
+    settings = settings if settings is not None else cfg.get("settings", {})
+    raw = json.dumps([model, voice_id, settings, text.strip()], ensure_ascii=False, sort_keys=True)
+    return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:20]
+
+
+def line_file(text, speaker):
+    return VOICE_CACHE / f"{line_key(text, eleven_voice(speaker))}.mp3"
+
+
+def _decode(path, sr=44100):
+    """An ElevenLabs line from the cache: natural speed (no time-stretch), leading and trailing silence cut."""
+    cmd = ["ffmpeg", "-v", "error", "-i", str(path), "-af",
+           "silenceremove=start_periods=1:start_threshold=-45dB,areverse,silenceremove=start_periods=1:start_threshold=-45dB,areverse",
+           "-f", "f32le", "-ar", str(sr), "-ac", "1", "pipe:1"]
+    r = subprocess.run(cmd, capture_output=True)
+    if r.returncode != 0 or not r.stdout:
+        raise SystemExit(f"could not decode {path}: {r.stderr.decode()[:300]}")
+    y = np.frombuffer(r.stdout, dtype=np.float32).copy()
+    n = int(0.008 * sr)
+    if len(y) > 2 * n:
+        y[:n] *= np.linspace(0, 1, n)
+        y[-n:] *= np.linspace(1, 0, n)
+    return np.clip(y, -1, 1), sr
+
+
+def speak_line(text, speaker=None, provider="piper", date=None, voice=None):
+    """One beat's voice as float32 mono samples. ElevenLabs lines come only from the cache (never the network);
+    Piper picks a voice by character (female cast -> meera, male -> arjun), else the voice of the week."""
+    if provider == "eleven":
+        f = line_file(text, speaker)
+        if not f.exists():
+            raise FileNotFoundError(str(f))
+        return _decode(f)
+    v = voice or PIPER_CAST.get(speaker or "") or voice_for_week(date or dt.date.today().isoformat())
+    return speak(text, v)
 
 # Piper's own length scale (sherpa "speed"); it shortens phonemes natively.
 MODEL_SPEED = {"arjun": 1.7, "meera": 1.6}

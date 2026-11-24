@@ -73,6 +73,11 @@ elif reel.exists():
     if int(probe["format"]["size"]) > 100 * 1024 * 1024:
         errors.append("reel is over 100 MB")
     notes.append(f"reel: {dur:.1f}s")
+    info_file = folder / "reel.json"
+    attribution = CONFIG["voice"].get("eleven", {}).get("attribution", "")
+    if info_file.exists() and attribution:
+        if json.loads(info_file.read_text(encoding="utf-8")).get("provider") == "eleven" and attribution not in caption:
+            errors.append(f"the voice is ElevenLabs on the free plan: the caption needs the line '{attribution}'")
 else:
     errors.append("no slide-*.jpg and no reel.mp4")
 
