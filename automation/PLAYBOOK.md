@@ -52,6 +52,10 @@ goes out. There are **only reels** now: no carousels or image posts.
 > Second B-rules look: `"theme": "board"` (`scripts/board.py`, 22 Nov 2026: editorial puzzle page, newsprint paper with a
 > drifting crossword grid, DM Serif Display headlines, yellow highlighter sweeps, huge flipping game tiles, deep green
 > slab bleeding off the bottom; scene types hook, board (tiles + ticking timer bar), reveal (tiles flip), loop).
+> Third B-rules look: `"theme": "race"` (`scripts/race.py`, 24 Nov 2026: sports-broadcast race HUD, hot orange-red field
+> with sliding black diagonal slabs and white speed streaks, Anton condensed headlines with a hard black drop, lime-on-black
+> tags, four "lap" boxes that tick off puzzles; scene types hook, triangle (3-way diagram + draining timer), reveal (answer
+> slams in, next lap box fills with a check), loop). Made for challenges, the daily four, streaks and speed rounds.
 
 These are his three requirements, plus what made the approved sample work. Don't loosen them.
 

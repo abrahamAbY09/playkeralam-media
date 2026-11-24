@@ -13,6 +13,10 @@ fi
 if [ ! -f "$CACHE/fonts/node_modules/@fontsource/dm-serif-display/400.css" ]; then
   (cd "$CACHE/fonts" && npm install --silent @fontsource/dm-serif-display@5)
 fi
+# Anton: the condensed headline face of the "race" reel theme (race.py, 24 Nov 2026).
+if [ ! -f "$CACHE/fonts/node_modules/@fontsource/anton/400.css" ]; then
+  (cd "$CACHE/fonts" && npm install --silent @fontsource/anton@5)
+fi
 
 # Always install with "python3 -m pip": plain "pip" can belong to a different Python than "python3" (it did on
 # the cloud runner: pip was 3.13, python3 was 3.11), which left the scripts unable to import what was installed.

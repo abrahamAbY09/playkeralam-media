@@ -61,6 +61,7 @@ from common import esc as _esc  # noqa: E402
 import sound  # noqa: E402
 import studio  # noqa: E402
 import board  # noqa: E402
+import race  # noqa: E402
 from voice import speak, voice_for_week  # noqa: E402
 
 W, H, FPS, SR = CONFIG["reels"]["width"], CONFIG["reels"]["height"], CONFIG["reels"]["fps"], 44100
@@ -70,7 +71,7 @@ TAIL = 0.38       # after the last beat, before the cut
 ALL_GAMES = ["vaakku", "paryayam", "thaaranira", "katha", "psc", "aadyam", "ashwamedham",
              "antakshari", "kerala-guesser", "thurupp", "cidmoosa", "sat"]
 WARN = []
-THEME = {"name": None}   # set from spec["theme"]; "studio" (studio.py) and "board" (board.py) are the B-rules looks
+THEME = {"name": None}   # set from spec["theme"]; "studio" (studio.py), "board" (board.py), "race" (race.py) are the B-rules looks
 
 
 def clean(text):
@@ -344,6 +345,8 @@ def scene_html(s, i, gid, ts, dur, start, total, spec_dir):
         return studio.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
     if THEME["name"] == "board":
         return board.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
+    if THEME["name"] == "race":
+        return race.scene_html(s, i, gid, ts, dur, start, total, spec_dir, fonts_head())
     accent = game(gid)["color"] if gid else BLUE
     t = s["type"]
     look = LOOKS.get(t, "pale" if i % 2 else "soft")
@@ -397,7 +400,7 @@ def default_sfx(scene_type, scene_index, beat_index, beat):
         return "boom" if scene_index == 0 and beat_index == 0 else ("pop" if beat.get("text") else None)
     if scene_type in ("answer", "reveal"):
         return "ding" if beat_index == 0 else None
-    if scene_type in ("quiz", "loop", "board"):
+    if scene_type in ("quiz", "loop", "board", "triangle"):
         return "pop" if beat.get("say") or beat.get("text") else None
     if scene_type in ("cards", "clues", "steps", "countdown", "cta"):
         return "pop"
