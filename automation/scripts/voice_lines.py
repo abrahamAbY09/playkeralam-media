@@ -127,8 +127,8 @@ def cmd_preflight():
     code = code.strip()
     if code in ("", "000"):
         why = r.stderr.strip().splitlines()[-1] if r.stderr.strip() else f"curl exit {r.returncode}"
-        problems.append(f"this workspace can't download from {DOWNLOAD_HOST} ({why}). The cloud environment's network "
-                        f"access must allow {DOWNLOAD_HOST}; until then ElevenLabs audio can't reach the repo.")
+        problems.append(f"this workspace can't download from {DOWNLOAD_HOST} ({why}). It must be listed in claude.ai "
+                        f"Settings > Capabilities > Allowed websites; until then ElevenLabs audio can't reach the repo.")
     for p in problems:
         print("FAIL:", p)
     if problems:

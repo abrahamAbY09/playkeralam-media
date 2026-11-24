@@ -177,6 +177,7 @@
       },
       "castNote": "Picked 24 Nov 2026 from the ElevenLabs voice library listing (free), no auditions. Library voices work on the free plan through the connector without using a voice slot. Changing a voice id makes every cached line of that character a new line (paid again).",
       "downloadHost": "elevenlabsusercontent.com",
+      "downloadHostNote": "Allowed in claude.ai Settings > Capabilities > Allowed websites (24 Nov 2026); voice_lines.py preflight checks it.",
       "attribution": "Voice: ElevenLabs (elevenlabs.io)",
       "attributionNote": "ElevenLabs' free plan requires crediting ElevenLabs and does not allow commercial use; on a paid plan (Starter or above) set attribution to an empty string."
     }

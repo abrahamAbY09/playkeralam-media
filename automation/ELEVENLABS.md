@@ -1,15 +1,16 @@
 # ElevenLabs voice for the story reels
 
-Status (24 Nov 2026): **wired**. `config.json` → `voice.provider` is `"eleven"`, the cast's voices are set, and
-`voice_lines.py` handles the budget, the cache and the download. Two settings outside this repo decide whether a run
-can actually use it; until both are in place every run falls back to Piper by itself (preflight fails, or the tools
-are missing) and says so:
+Status (24 Nov 2026): **wired and working.** `config.json` → `voice.provider` is `"eleven"`, the cast's voices are set,
+`voice_lines.py` handles the budget, the cache and the download, and the first line (the sign-off) is in the cache.
 
-1. **Network:** the cloud environment the daily reel task runs in must allow `elevenlabsusercontent.com`. That is
-   where the connector puts the audio files, and on 24 Nov 2026 the workspace proxy refused it (HTTP 403), so audio
-   could not be downloaded into the repo. `python3 automation/scripts/voice_lines.py preflight` checks this for free.
-2. **Connector:** the daily reel scheduled task must include the ElevenLabs connector (the `mcp__ElevenLabs__*`
-   tools).
+Two settings outside this repo make it work; if a run says either is missing, this is where they live:
+
+1. **Network:** claude.ai **Settings > Capabilities > Allowed websites** lists `elevenlabsusercontent.com` (added
+   24 Nov 2026, with "Standard download sites only" kept). That is where the connector puts the audio files; without
+   it the workspace proxy refuses the download (HTTP 403). `python3 automation/scripts/voice_lines.py preflight` checks
+   it for free. (The Claude Code cloud-environment setting does not apply to these Play Keralam project sessions.)
+2. **Connector:** the run needs the ElevenLabs connector's tools (`mcp__ElevenLabs__*`). If a run doesn't have them it
+   falls back to Piper and sends a push notification.
 
 ## What the connector test showed (24 Nov 2026)
 
@@ -24,8 +25,8 @@ are missing) and says so:
 - Do NOT use `creative_execute_sandbox` to move audio: it has no network, returns only ~10 KB of output per call and
   costs about 2 credits a second.
 - The test line was the fixed sign-off ("പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ.", narrator), so it isn't wasted:
-  it is logged in `voice-usage.json` as paid but not downloaded (flow `Sb26gIaZApkvsXYePjNo`, generation
-  `Af4cK7n78yVIy9wiY364`). The first run that passes preflight fetches it, and every reel after that reuses it free.
+  it was downloaded once the network setting was added and is in `voice-cache/eleven/` (2.0 s); every reel reuses it
+  free.
 
 ## Why the care
 

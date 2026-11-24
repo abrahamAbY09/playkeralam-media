@@ -11,10 +11,11 @@
    "chars": 38,
    "key": "a092dea71bfaa2d461b9",
    "prompt": "പ്ലേ കേരളം ഡോട്ട് കോമിൽ കളിച്ചുനോക്കൂ.",
-   "status": "pending",
+   "status": "stored",
    "flow": "Sb26gIaZApkvsXYePjNo",
    "gen": "Af4cK7n78yVIy9wiY364",
-   "note": "The fixed playkeralam.com sign-off line (url beat). Voiced 24 Nov 2026 as the connector test; fetch it once the environment allows elevenlabsusercontent.com, then every reel reuses it free."
+   "note": "The fixed playkeralam.com sign-off line (url beat). Voiced 24 Nov 2026 as the connector test; fetch it once the environment allows elevenlabsusercontent.com, then every reel reuses it free.",
+   "seconds": 2.04
   }
  ]
 }
