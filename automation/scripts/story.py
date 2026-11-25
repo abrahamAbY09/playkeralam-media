@@ -422,7 +422,7 @@ body{font-family:'Baloo Chettan 2',sans-serif;color:#1E140E;-webkit-font-smoothi
   transform:rotate(-2deg);box-shadow:0 16px 0 rgba(0,0,0,.35);max-width:900px}
 .ans .s{font-weight:800;font-size:56px;color:#fff;background:#C2185B;padding:8px 26px 0;border-radius:16px;transform:rotate(1.5deg)}
 .ans>*{animation:slam .34s cubic-bezier(.2,1.5,.4,1) both}
-.flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:9;animation:flash .45s ease-out both}
+.flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:9;animation:flash .45s ease-out forwards}
 @keyframes flash{0%{opacity:.9}100%{opacity:0}}
 .sign{position:absolute;left:0;right:0;top:-60px;display:flex;flex-direction:column;align-items:center;transform-origin:50% -200px;
   animation:sign 1.1s cubic-bezier(.3,1.5,.5,1) both}
