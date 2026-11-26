@@ -39,7 +39,7 @@
   "all-games"
  ],
  "cycle": 1,
- "next": 13,
+ "next": 14,
  "history": [
   {
    "date": "2026-10-20",
@@ -461,6 +461,33 @@
    "voice": {
     "provider": "eleven",
     "credits": 380
+   }
+  },
+  {
+   "date": "2026-11-26",
+   "kind": "reel",
+   "topic": "cidmoosa",
+   "format": "route",
+   "rotationIndex": 13,
+   "cycle": 1,
+   "run": "daily",
+   "metricoolUuid": "-3075357878869933485",
+   "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-3075357878869933485",
+   "folder": "2026-11-26-cidmoosa-reel",
+   "title": "CID Moosa story reel at the tea shop: Uncle boasts no police jeep can catch him, drives Moosa's car, panics when a jeep closes in; Ammachi says chilli powder; the jeep sneezes and brakes, chilli in Uncle's eyes too; tag your show-off driver uncle",
+   "look": {
+    "theme": "story",
+    "setting": "tea-shop",
+    "tint": "evening",
+    "cast": [
+     "uncle",
+     "ammachi",
+     "meenu"
+    ]
+   },
+   "voice": {
+    "provider": "eleven",
+    "credits": 337
    }
   }
  ]
