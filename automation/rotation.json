@@ -39,7 +39,7 @@
   "all-games"
  ],
  "cycle": 1,
- "next": 14,
+ "next": 15,
  "history": [
   {
    "date": "2026-10-20",
@@ -488,6 +488,33 @@
    "voice": {
     "provider": "eleven",
     "credits": 337
+   }
+  },
+  {
+   "date": "2026-11-28",
+   "kind": "reel",
+   "topic": "general:all-games",
+   "format": "all-games",
+   "rotationIndex": 14,
+   "cycle": 1,
+   "run": "daily",
+   "metricoolUuid": "-565719757552464657",
+   "plannerUrl": "https://app.metricool.com/planner/calendar?blogId=7540170&openWithPostUuid=-565719757552464657",
+   "folder": "2026-11-28-all-games-reel",
+   "title": "All-games story reel on a night terrace: Uncle says phone games are all English; Appu shows 12 Malayalam games (5 daily, 7 any time, even 28 online); Ammachi has played all twelve and deals for 28, Uncle flees to bed; send this to your Ammachi",
+   "look": {
+    "theme": "story",
+    "setting": "night-terrace",
+    "tint": "night",
+    "cast": [
+     "uncle",
+     "appu",
+     "ammachi"
+    ]
+   },
+   "voice": {
+    "provider": "eleven",
+    "credits": 407
    }
   }
  ]
